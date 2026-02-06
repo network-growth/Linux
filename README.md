@@ -12,6 +12,6 @@
 
 ## 📅 학습 로그 (Daily Logs)
 - [x] [1일차: Ubuntu 서버 설치 및 기초 구성]
-- [x] [2일차: 리눅스 기초 명령어(pwd, ls, mkdir, echo)]
-
+- [x] [2일차: 리눅스 기초 명령어 (pwd, ls, mkdir, echo)]
+- [x] [3일차: 리눅스 파일 관련 명령어 (cp, mv, rm, rm -rf)]
 
