@@ -18,7 +18,7 @@
 
 ### [실습 3] 네트워크 정보 확인 (`ip addr`)
 서버 통신의 기본인 IP 주소를 확인했습니다. 가상 머신(VM) 환경에서의 네트워크 인터페이스 구조를 이해하는 계기가 되었습니다.
-<img width="1286" height="805" alt="Image" src="https://github.com/user-attachments/assets/87128b98-ca09-41de-a772-0f647969cddd" />
+<img width="1284" height="884" alt="ip" src="https://github.com/user-attachments/assets/cc92a8b7-6a73-4380-8708-0fccc14e5d47" />
 
 ---
 
