@@ -18,6 +18,7 @@
 
 ### [실습 3] 파일 검색 (`find`)
 어디에 있는지 모르는 파일을 이름만으로 빠르게 찾아내는 `find` 명령어를 실습했습니다. 
+
 <img width="369" height="48" alt="화면 캡처 2026-02-12 151707" src="https://github.com/user-attachments/assets/6e8f85bd-9904-46a0-9805-0414869e4139" />
 
 ---
