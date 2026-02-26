@@ -38,7 +38,7 @@
 - **`curl localhost/non-existent-page`**: 없는 페이지를 호출하여 `404 Not Found` 에러 유도
 - **`sudo grep "404" /var/log/nginx/access.log`**: 특정 에러 코드만 필터링하여 확인
 - **`sudo journalctl -u nginx`**: Nginx 서비스 자체의 시스템 로그 확인
-- **`du -sh /var/log/*: 로그 파일이 차지하는 용량 확인
+- **`du -sh /var/log/`**: 로그 파일이 차지하는 용량 확인
 
 ---
 
