@@ -9,9 +9,11 @@
 
 ### [실습 1] 영문 서버 가디언 스크립트(`guardian.sh`) 작성
 터미널 환경의 호환성을 위해 모든 출력 메시지를 영어로 구성한 지능형 스크립트를 설계했습니다. 서비스 중단 시 자동 복구 로직과 접속자 수 임계치 초과 시 경고를 남기는 기능을 구현했습니다.
+<img width="716" height="488" alt="Image" src="https://github.com/user-attachments/assets/2016bb53-46e6-4403-afc8-6d2bc4c765ed" />
 
 ### [실습 2] 실행 권한 부여 및 자동화 엔진 결합
 작성한 스크립트가 관리자 개입 없이 24시간 독립적으로 동작하도록 설정했습니다. `chmod +x`로 실행 파일화한 뒤, Crontab에 등록하여 1분마다 시스템을 스스로 점검하도록 자동화했습니다.
+<img width="1274" height="246" alt="Image" src="https://github.com/user-attachments/assets/bae5e0ef-6227-49e8-8122-f710e2e0afe3" />
 
 ### [실습 3] 장애 복구 시뮬레이션 및 최종 점검
 `systemctl stop nginx`로 고의 장애를 발생시킨 후 스크립트의 성능을 검증했습니다. 1분 내에 영어로 된 로그가 기록되며 서비스가 자동으로 'Active' 상태로 복구되는 'Self-Healing' 과정을 최종 확인했습니다.
