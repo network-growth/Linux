@@ -5,15 +5,6 @@
 
 ---
 
-## 핵심 명령어 요약
-- **`sudo ufw status`**: 방화벽의 현재 활성 상태 및 규칙 확인
-- **`sudo ufw allow [Port]`**: 특정 포트(예: 80, 22)의 접속을 허용
-- **`sudo ufw deny [Port]`**: 특정 포트의 접속을 차단
-- **`sudo ufw enable / disable`**: 방화벽 서비스를 시작하거나 중지
-- **`sudo ufw status numbered`**: 적용된 규칙을 번호와 함께 리스트 형태로 출력
-
----
-
 ## 실습 기록 상세
 
 ### [실습 1] 기본 보안 정책 수립
