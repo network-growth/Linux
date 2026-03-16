@@ -18,6 +18,9 @@
 
 ### [실습 3] 장애 복구 시뮬레이션 및 최종 점검
 `systemctl stop nginx`로 고의 장애를 발생시킨 후 스크립트의 성능을 검증했습니다. 1분 내에 영어로 된 로그가 기록되며 서비스가 자동으로 'Active' 상태로 복구되는 'Self-Healing' 과정을 최종 확인했습니다.
+<img width="574" height="290" alt="Image" src="https://github.com/user-attachments/assets/7e764cb5-8ecb-4a58-96c4-a2c4178cb881" />
+<img width="487" height="89" alt="Image" src="https://github.com/user-attachments/assets/5f6a95a0-3a3c-4957-b4db-f2011dda79fc" />
+<img width="1280" height="186" alt="Image" src="https://github.com/user-attachments/assets/4e007235-9a27-4b13-8557-3c104929922a" />
 
 ---
 
