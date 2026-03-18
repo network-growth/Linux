@@ -15,6 +15,7 @@
 
 ### [실습 2] 환경 변수 및 경로 트러블슈팅
 `sudo` 실행 시 `$HOME` 변수가 `/root`로 인식되어 파일을 찾지 못하는 문제를 발견했습니다. 이를 해결하기 위해 `/home/growth/`와 같은 **절대 경로**를 할당하여 스크립트의 안정성을 확보했습니다.
+
 <img width="643" height="96" alt="스크린샷 2026-03-18 191627" src="https://github.com/user-attachments/assets/ad4248ff-598d-4b45-8ca9-e6c4b67654f0" />
 <img width="552" height="85" alt="스크린샷 2026-03-18 192136" src="https://github.com/user-attachments/assets/85b2b5a4-de1d-4ca4-8bd3-4b76395390ac" />
 
