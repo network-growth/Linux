@@ -35,3 +35,4 @@
 - [x] [22일차: NFS 기반 중앙 집중형 공유 스토리지 구축 실습]
 - [x] [23일차: 실무형 Multi-stage Docker 빌드 및 서비스 컨테이너화]
 - [x] [24일차: Docker Compose를 활용한 다중 컨테이너 통합 관리]
+- [x] [25일차: Docker Healthcheck 및 Self-healing 인프라 구축]
