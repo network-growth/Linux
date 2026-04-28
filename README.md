@@ -36,3 +36,4 @@
 - [x] [23일차: 실무형 Multi-stage Docker 빌드 및 서비스 컨테이너화]
 - [x] [24일차: Docker Compose를 활용한 다중 컨테이너 통합 관리]
 - [x] [25일차: Docker Healthcheck 및 Self-healing 인프라 구축]
+- [x] [26일차: Docker Load Balancer & Container Troubleshooting]
