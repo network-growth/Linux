@@ -37,3 +37,5 @@
 - [x] [24일차: Docker Compose를 활용한 다중 컨테이너 통합 관리]
 - [x] [25일차: Docker Healthcheck 및 Self-healing 인프라 구축]
 - [x] [26일차: Docker Load Balancer & Container Troubleshooting]
+- [x] [27일차: Nginx 로드밸런서 구축 및 Failover 환경 검증]
+- [x] [28일차: WAF(Web Application Firewall) 구축 및 보안 차단 검증]
