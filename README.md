@@ -40,3 +40,4 @@
 - [x] [27일차: Nginx 로드밸런서 구축 및 Failover 환경 검증]
 - [x] [28일차: WAF(Web Application Firewall) 구축 및 보안 차단 검증]
 - [x] [29일차: WAF 실시간 로그 수집 및 호스트 동기화 환경 구축]
+- [x] [30일차: [Zero-Trust Infrastructure] Next-Pay 핀테크 인프라 고도화 프로젝트 1일차]     
