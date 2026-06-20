@@ -45,3 +45,4 @@
 - [x] [32일차: 한국항공대학교 학생부종합/특기자 전형 면접 대비 예상 질문 & 답변 스크립트
 - [x] [33일차: [Container Supply Chain Security] 공급망 보안 고도화 프로젝트 1일차 - 스캔 엔진 구축 및 베이스 이미지 정밀 타격] 
 - [x] [34일차: [Container Supply Chain Security] 공급망 보안 고도화 프로젝트 2일차 - Cosign 디지털 서명 키페어 생성 및 오프라인 무결성 검증]
+- [x] [35일차: [Container Supply Chain Security] 공급망 보안 고도화 프로젝트 3일차 - Shell Script 기반 보안 파이프라인(SecOps) 자동화 구축]
