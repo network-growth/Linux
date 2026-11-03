@@ -1,4 +1,4 @@
-# 25일차: Docker Healthcheck 및 Self-healing 인프라 구축 (2026.04.11)
+# Day 25. Docker Healthcheck 및 Self-healing (2026-04-11)
 
 ## 오늘의 목표
 - **가용성 자동화**: Docker의 `healthcheck` 기능을 활용하여 서비스의 이상 상태를 실시간으로 탐지한다.
