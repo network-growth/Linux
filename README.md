@@ -83,3 +83,7 @@
 ### 06. Infrastructure as Code
 
 수동으로 구축한 서버 환경을 Ansible·Terraform 코드로 재현하는 프로젝트 — [폴더 바로가기](06-Infrastructure-as-Code/README.md)
+
+| Day | 주제 | 날짜 |
+|---|---|---|
+| [Day 01](06-Infrastructure-as-Code/Daily-log/Day-01.md) | SSH 키 인증 및 서버 접속 보안 설정 | 2026-11-03 |

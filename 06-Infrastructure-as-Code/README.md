@@ -28,13 +28,13 @@
 ```
 
 ## 진행 기록
-| Day | 주제 | 폴더 |
-|---|---|---|
-| Day 01 | SSH 보안 설정 | [day1-ssh-hardening](day1-ssh-hardening) |
-| Day 02 | 수동 서버 구성 기록 | [day2-manual-setup](day2-manual-setup) |
-| Day 03 | systemd 타이머 백업 | [day3-systemd-backup](day3-systemd-backup) |
-| Day 04 | Ansible 코드화 | [day4-ansible](day4-ansible) |
-| Day 05 | 멱등성·드리프트 테스트 | [day5-idempotency](day5-idempotency) |
-| Day 06 | 새 서버 재구축 검증 | [day6-rebuild](day6-rebuild) |
+| Day | 주제 | 폴더 | 기록 |
+|---|---|---|---|
+| Day 01 | SSH 보안 설정 | [day1-ssh-hardening](day1-ssh-hardening) | [Day-01](Daily-log/Day-01.md) · 2026-11-03 |
+| Day 02 | 수동 서버 구성 기록 | [day2-manual-setup](day2-manual-setup) | |
+| Day 03 | systemd 타이머 백업 | [day3-systemd-backup](day3-systemd-backup) | |
+| Day 04 | Ansible 코드화 | [day4-ansible](day4-ansible) | |
+| Day 05 | 멱등성·드리프트 테스트 | [day5-idempotency](day5-idempotency) | |
+| Day 06 | 새 서버 재구축 검증 | [day6-rebuild](day6-rebuild) | |
 
 > 매일 기록은 [Daily-log](Daily-log)에 작성
