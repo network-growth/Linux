@@ -1,4 +1,4 @@
-# 28일차: WAF(Web Application Firewall) 구축 및 보안 차단 검증 (2026.05.08)
+# Day 28. WAF 구축 및 보안 차단 검증 (2026-05-08)
 
 ## 오늘의 목표
 - **보안 인프라 강화**: Nginx 앞단에 WAF(ModSecurity)를 배치하여 웹 공격을 필터링한다.
