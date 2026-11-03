@@ -1,4 +1,4 @@
-# Day 31. [Zero-Trust] Next-Pay 핀테크 인프라 2 - 제로 트러스트 보안망 구축 및 검증 (2026-05-30)
+# Day 04. [Zero-Trust] Next-Pay 핀테크 인프라 2 - 제로 트러스트 보안망 구축 및 검증 (2026-05-30)
 
 ## 1. 대규모 프로젝트 시나리오 (Situation)
 당신은 Next-Pay의 Lead Infrastructure Architect입니다. 1일차에 프로비저닝한 쿠버네티스(Minikube) 및 Istio 인프라 기지를 기반으로, 본격적인 서비스 메쉬 보안 자물쇠를 채워야 합니다. 마이크로서비스 간의 모든 Plain Text(평문) 트래픽을 거부하는 상호 TLS(mTLS STRICT) 모드를 강제하고, 화이트리스트 기반의 L7 인가 정책(AuthorizationPolicy)을 수립하여 비인가 공격자의 침입을 원천 차단하는 제로 트러스트 실효성을 최종 검증해야 합니다.

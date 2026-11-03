@@ -1,46 +1,47 @@
-# Day 11. 로그 분석 및 장애 상황 재현 (2026-02-26)
+# Day 11. 리소스 모니터링 및 자동 알림 시스템 (2026-03-21)
+
 
 ## 오늘의 목표
-- 서버 로그의 생성 원리를 이해하고, 인위적인 부하 및 에러 상황을 만들어 로그 분석 능력을 키우기
+- CPU, 메모리, 디스크 사용량을 실시간으로 체크하는 모니터링 스크립트를 구현한다.
+- 리소스 사용량이 임계치(80%)를 넘을 경우 터미널과 로그 파일에 즉각 경고를 남기는 자동화 로직을 완성한다.
 
 ---
 
 ## 실습 기록 상세
 
-### [실습 1] 테스트용 대량 로그 생성 (Traffic Generation)
-실무 환경처럼 로그가 계속 쌓이는 상황을 재현하기 위해 `while` 루프를 사용했습니다. 별도의 터미널 창에서 무한 루프 쉘 스크립트를 실행하여 웹 서버에 지속적인 트래픽을 발생시켰고, `tail -f`를 통해 실시간으로 데이터가 쌓이는 것을 확인했습니다.
-<img width="1295" height="287" alt="1" src="https://github.com/user-attachments/assets/d03d0a58-e152-4e8e-8a17-3ad8941804e6" />
-<img width="1312" height="724" alt="2" src="https://github.com/user-attachments/assets/6ae55faf-40e1-4d64-b928-3b31cd2d99f7" />
+### [실습 1] 리소스 체크 스크립트(`sys_check.sh`) 작성
+`df`, `free`, `uptime` 명령어를 조합하여 서버의 3대 핵심 자원(디스크, 메모리, CPU) 상태를 한눈에 보여주는 스크립트를 설계했습니다. 어제 배운 교훈대로 모든 경로는 절대 경로(`/home/growth/...`)를 사용하여 안정성을 높였습니다.
 
-### [실습 2] 인위적 에러 발생 및 필터링 (Error Simulation)
-로그 필터링 연습을 위해 일부러 존재하지 않는 페이지(`secret_file.html`)를 반복 호출했습니다. 이후 `grep "404"` 명령어를 통해 수많은 접속 기록 중 실제 에러가 발생한 지점만 정확히 찾아내는 연습을 수행했습니다.
-<img width="1292" height="202" alt="3" src="https://github.com/user-attachments/assets/aa8be9dc-e7a9-44b6-98e5-b07e69b922d9" />
-<img width="1302" height="654" alt="4" src="https://github.com/user-attachments/assets/d2e0bee3-e0a4-4cc9-9a24-af2663907534" />
+<img width="778" height="416" alt="스크린샷 2026-03-21 112734" src="https://github.com/user-attachments/assets/15d83592-5064-449a-9018-f020ed2c1f25" />
 
----
 
-## Troubleshooting (장애 대응 및 배운 점)
+### [실습 2] 스크립트 권한 설정 및 환경 구성
+작성된 `sys_check.sh` 파일에 `chmod +x` 명령어로 실행 권한을 부여했습니다. 이 과정에서 발생할 수 있는 경로 오타(`grwoth`)를 디버깅하여 `/home/growth/` 경로에 로그 파일이 정상적으로 생성되도록 환경을 세팅했습니다.
 
-### 문제 상황
-- `tail -f`를 실행했으나 화면에 아무런 변화가 없어 서버가 멈춘 것으로 오해함.
-- 명령어 실행 중 `sudo` 비밀번호를 묻지 않아 보안 설정에 의문을 가짐.
+<img width="778" height="181" alt="스크린샷 2026-03-21 112758" src="https://github.com/user-attachments/assets/54892848-b365-4a47-bac7-f2aa34d0fa72" />
 
-### 원인 분석 및 해결
-1. **로그 생성 원리**: 로그는 '사건'이 발생해야 기록됨. 클라이언트(나)가 접속하지 않으면 로그는 찍히지 않음 → `curl` 루프를 돌려 해결함.
-2. **Sudo 권한 유지**: 리눅스는 한 번 `sudo` 인증을 하면 일정 시간(약 5~15분) 동안 세션을 유지함. 이는 오류가 아니라 사용자 편의를 위한 기능임을 학습함.
+
+### [실습 3] 스크립트 실행 및 결과 값 출력 확인
+스크립트를 실행하여 현재 디스크, 메모리, CPU 상태가 터미널에 정상 출력되는지 확인했습니다. `tee -a`를 통해 화면 출력과 동시에 로그 파일에 기록되는 것을 검증하였으며, 임계치 테스트를 통해 알림 로직이 작동함을 확인했습니다
+
+<img width="500" height="80" alt="스크린샷 2026-03-21 112812" src="https://github.com/user-attachments/assets/1c9004ef-1a14-4279-8cb6-3713de63143b" />
+<img width="419" height="96" alt="스크린샷 2026-03-21 113050" src="https://github.com/user-attachments/assets/76cb3b48-84ab-403c-b8d6-b6bbb853ca21" />
 
 ---
 
 ## 핵심 명령어 요약
-- **`sudo tail -f /var/log/nginx/access.log`**: Nginx 접속 로그 실시간 모니터링
-- **`while true; do curl localhost; sleep 0.5; done`**: 0.5초마다 접속을 시도하여 대량의 로그 생성 (트래픽 시뮬레이션) 
-   -> 개인서버로 실습을 할때 로그를 만들어내기 위한것
-- **`curl localhost/non-existent-page`**: 없는 페이지를 호출하여 `404 Not Found` 에러 유도
-- **`sudo grep "404" /var/log/nginx/access.log`**: 특정 에러 코드만 필터링하여 확인
-- **`sudo journalctl -u nginx`**: Nginx 서비스 자체의 시스템 로그 확인
-- **`du -sh /var/log/`**: 로그 파일이 차지하는 용량 확인
+- **`df -h / | awk '{print $5}' | cut -d'%' -f1`**: 디스크 사용량에서 숫자만 추출
+- **`free -m | grep Mem | awk '{print $3}'`**: 사용 중인 메모리 양(MB) 확인
+- **`tee -a [파일명]`**: 출력 결과를 화면에 보여줌과 동시에 파일 끝에 추가 기록
+- **`if [ $DISK -gt 80 ]`**: 변수값이 80보다 클 경우(Greater Than) 조건문 실행
+
+---
+
+## 배운 점 & 트러블슈팅
+- **절대 경로의 생활화**: `sudo` 환경이나 자동화 스크립트 실행 시 경로가 꼬이는 문제를 원천 차단하기 위해 절대 경로 사용을 습관화함.
+- **데이터 가공 역량**: 방대한 시스템 로그에서 내가 필요한 '값'만 추출하여 로직에 활용하는 인프라 엔지니어의 핵심 스킬을 습득함.
 
 ---
 
 ## 🇯🇵 오늘의 일본어 엔지니어링
-- **단어 1:** **発生 (はっせい, 핫세이)** - 발생 (로그나 장애가 생김)
+- **単語: 監視 (かんし, 칸시)** - 모니터링 / 감시

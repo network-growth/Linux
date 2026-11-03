@@ -1,4 +1,4 @@
-# Day 24. Docker Compose 다중 컨테이너 관리 (2026-04-06)
+# Day 02. Docker Compose 다중 컨테이너 관리 (2026-04-06)
 
 ## 오늘의 목표
 - **인프라 코드화(IaC)**: `docker-compose.yml`을 작성하여 여러 개의 서비스를 하나의 설정 파일로 관리한다.

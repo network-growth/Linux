@@ -1,55 +1,44 @@
-# Day 09. Nginx 웹 서버 설치 및 환경 설정 (2026-02-21)
+# Day 09. 실시간 보안 로그 분석 및 침입 탐지 (2026-03-16)
+
 
 ## 오늘의 목표
-- 웹 서버 소프트웨어(Nginx)를 설치하고, 직접 작성한 HTML 페이지를 호스팅하기
+- 리눅스 인증 로그(`/var/log/auth.log`)를 분석하여 무단 접근 시도를 탐지하고, 공격자의 IP를 자동으로 요약하는 보안 리포트 스크립트를 구현한다.
 
 ---
 
 ## 실습 기록 상세
 
-### [실습 1] Nginx 설치 및 데몬(Daemon) 관리
-패키지 매니저를 통해 Nginx를 설치했습니다. `systemctl` 명령어를 사용하여 서버 부팅 시 자동으로 실행되도록 설정하고, 현재 프로세스가 정상 작동 중인지 점검했습니다.
-<img width="1289" height="804" alt="sudo nginx" src="https://github.com/user-attachments/assets/aff2060c-9c85-4b1e-99c3-881b8ccdb5a4" />
-<img width="1282" height="798" alt="states" src="https://github.com/user-attachments/assets/f133cefd-bbc4-4c27-b3db-e322b36ab38d" />
+### [실습 1] 침입 탐지 스크립트(`intruder_alert.sh`) 작성
+서버의 보안 로그를 스캔하여 외부 침입 시도를 리포트화하는 스크립트를 설계했습니다. `auth.log` 파일의 접근 권한 문제를 고려하여 `sudo` 환경에서 동작하도록 구성하였으며, `intruder_report.txt`로 결과를 자동 저장하도록 구현했습니다.
 
-### [실습 2] 웹 콘텐츠 커스터마이징
-웹 서버의 기본 경로인 `/var/www/html`로 이동하여 기존의 기본 페이지를 수정했습니다. VI 에디터를 사용하여 나만의 메시지가 담긴 HTML 파일을 생성했습니다.
-<img width="1281" height="794" alt="index" src="https://github.com/user-attachments/assets/e308bf42-ab04-4f99-9982-6936ab1d5cb3" />
+<img width="1284" height="380" alt="Image" src="https://github.com/user-attachments/assets/d4877530-45e5-472b-a769-4e13ba301b9d" />
 
-### [실습 3] HTTP 응답 확인
-터미널에서 `curl` 명령어를 사용하여 내가 만든 웹 페이지의 소스 코드가 정상적으로 반환되는지 확인했습니다. 외부 브라우저 접속을 위한 기초 설정을 완료했습니다.
-<img width="1279" height="154" alt="localhost" src="https://github.com/user-attachments/assets/5a59398f-a955-4a96-993d-7d5e50fd18da" />
+### [실습 2] 가짜 침입 시뮬레이션 및 데이터 검증
+스크립트의 성능을 확인하기 위해 `ssh intruder_test@localhost` 명령어로 의도적인 로그인 실패 로그를 생성했습니다. 이후 스크립트가 해당 로그를 감지하여 리포트에 `127.0.0.1`과 시도 횟수를 정확히 기록하는지 검증했습니다.
 
----
+<img width="1281" height="100" alt="Image" src="https://github.com/user-attachments/assets/a6a8a0ba-d2db-48ad-966a-696f2d36a851" />
+<img width="1281" height="478" alt="Image" src="https://github.com/user-attachments/assets/a2d24d6a-a97b-47a4-8db8-97986007f896" />
 
-## Troubleshooting (장애 대응 기록)
+### [실습 3] 권한 및 환경 트러블슈팅
+로그 파일 접근 시 발생하는 `Permission denied`와 실행 파일 경로 인식 문제(`command not found`)를 해결했습니다. `chmod +x`를 통한 실행 권한 부여와 절대 경로 사용의 중요성을 실무적으로 학습했습니다.
 
-### 문제 상황
-- `sudo vi index.html`을 통해 웹 페이지 내용을 수정했음에도 불구하고, `curl localhost` 실행 시 수정된 내용이 반영되지 않고 기본 Nginx 페이지가 출력됨.
-- `ls -l /var/www/html/index.html` 확인 시 파일이 존재하지 않는다는 에러 메시지 발생.
-
-### 원인 분석
-- **파일 경로의 오해**: 리눅스 터미널에서 경로를 지정하지 않고 파일을 생성하면 현재 작업 디렉토리(Home)에 저장됨.
-- Nginx 웹 서버는 기본적으로 `/var/www/html/` 경로에 있는 파일을 서비스하기 때문에, 엉뚱한 위치의 파일을 수정하고 있었음.
-
-### 해결 방법
-1. **절대 경로 사용**: `sudo vi /var/www/html/index.html` 명령어를 사용하여 Nginx의 Root 디렉토리에 직접 파일을 생성함.
-2. **서비스 재시작**: 변경 사항을 확실히 반영하기 위해 `sudo systemctl restart nginx` 실행.
-3. **최종 확인**: `curl localhost`를 통해 내가 작성한 Hello, Linux 문구가 출력되는 것을 확인함.
-
-### 배운 점
-- 리눅스 설정 시에는 **상대 경로**보다 **절대 경로**를 명확히 지정하는 습관이 중요하다는 것을 깨달음.
+<img width="1270" height="146" alt="Image" src="https://github.com/user-attachments/assets/c8c38956-7c9e-4489-b437-4faf2cebf906" />
 
 ---
 
 ## 핵심 명령어 요약
-- **`apt install nginx`**: Nginx 웹 서버 설치
-- **`systemctl status nginx`**: 서비스 실행 상태 확인 (Active/Inactive)
-- **`systemctl restart nginx`**: 설정 변경 후 서버 재시작
-- **`sudo vi /var/www/html/index.html`**: Nginx 웹 서버의 기본 루트 디렉토리에 접근하여 메인 페이지 내용을 직접 수정 (index.html)
-- **`curl localhost`**: 로컬 환경에서 웹 응답 테스트
-  
+- **`sudo tail -f /var/log/auth.log`**: 실시간으로 쌓이는 보안 로그를 모니터링하여 침입 시도 확인
+- **`grep "Failed password"`**: 수많은 로그 중 로그인 실패 기록만 필터링
+- **`awk '{print $(NF-3)}'`**: 문장의 뒤에서 4번째 단어(IP 주소)를 정확히 추출하는 기법
+- **`sort | uniq -c | sort -nr`**: 침입 시도 횟수를 계산하고 가장 위험한 IP 순으로 정렬
+
+---
+
+## 배운 점 & 트러블슈팅
+- **권한 관리의 엄격함**: `/var/log/auth.log`와 같은 보안 민감 파일은 관리자(root) 권한 없이 접근이 불가능함을 체감하고, `sudo`를 적절히 활용하는 법을 익힘.
+- **로그 정규화 역량**: 방대한 텍스트 데이터 속에서 `grep`과 `awk`를 조합해 의미 있는 보안 데이터(공격 IP 등)만 골라내는 데이터 가공 능력을 습득함.
+
 ---
 
 ## 🇯🇵 오늘의 일본어 엔지니어링
-- **단어 1:** **構築 (こうちく, 코-치쿠)** - 구축 (Build/Setup)
+- **単語: 侵入検知 (しんにゅうけんち, 신뉴-켄치)** - 침입 탐지

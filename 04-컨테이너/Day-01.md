@@ -1,4 +1,4 @@
-# Day 23. Multi-stage Docker 빌드 및 컨테이너화 (2026-04-03)
+# Day 01. Multi-stage Docker 빌드 및 컨테이너화 (2026-04-03)
 
 ## 오늘의 목표
 - **이미지 최적화**: Multi-stage Build 기법을 사용하여 보안성과 효율성을 높인 도커 이미지를 제작한다.
