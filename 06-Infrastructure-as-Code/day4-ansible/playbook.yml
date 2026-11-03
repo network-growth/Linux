@@ -1,0 +1,39 @@
+- name: Server as Code
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: SSH 보안 설정 배포
+      ansible.builtin.copy:
+        src: ../day1-ssh-hardening/10-hardening.conf
+        dest: /etc/ssh/sshd_config.d/10-hardening.conf
+        mode: "0644"
+      notify: Restart ssh
+
+    - name: 백업 스크립트 배포
+      ansible.builtin.copy:
+        src: ../day3-systemd-backup/club-backup.sh
+        dest: /usr/local/bin/club-backup.sh
+        mode: "0755"
+
+    - name: systemd 유닛 배포
+      ansible.builtin.copy:
+        src: "../day3-systemd-backup/{{ item }}"
+        dest: "/etc/systemd/system/{{ item }}"
+        mode: "0644"
+      loop:
+        - club-backup.service
+        - club-backup.timer
+
+    - name: 백업 타이머 활성화
+      ansible.builtin.systemd:
+        name: club-backup.timer
+        enabled: true
+        state: started
+        daemon_reload: true
+
+  handlers:
+    - name: Restart ssh
+      ansible.builtin.service:
+        name: ssh
+        state: restarted

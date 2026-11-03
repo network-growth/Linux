@@ -1,0 +1,6 @@
+[Unit]
+Description=Club DB backup
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/club-backup.sh
