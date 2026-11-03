@@ -32,7 +32,9 @@ Get-Content $env:USERPROFILE\.ssh\id_ed25519.pub | ssh www@127.0.0.1 -p 2222 "mk
 | `~/.ssh` | `700` | 권한이 느슨하면 sshd가 키 인증을 거부함 |
 | `~/.ssh/authorized_keys` | `600` | 소유자만 읽기·쓰기 |
 
-<!-- 📸 키 생성 / authorized_keys 확인 캡처 -->
+<img width="1104" height="101" alt="image" src="https://github.com/user-attachments/assets/35719d41-b40a-48e1-8ec4-a12c442484da" />
+
+<img width="820" height="179" alt="image" src="https://github.com/user-attachments/assets/0b131bd7-d1a3-450e-b33e-ce05a75fe4c7" />
 
 ### [실습 2] 변경 전 설정 확인
 설정을 바꾸기 전에 sshd가 **실제로 적용 중인 값**을 먼저 기록했습니다. `sshd -T`는 설정 파일 여러 개를 합친 최종 결과를 보여줍니다.
@@ -40,8 +42,6 @@ Get-Content $env:USERPROFILE\.ssh\id_ed25519.pub | ssh www@127.0.0.1 -p 2222 "mk
 ```bash
 sudo sshd -T | grep -E 'passwordauthentication|permitrootlogin|kbdinteractive'
 ```
-
-<!-- 📸 Before 캡처 -->
 
 ### [실습 3] 드롭인(drop-in) 방식으로 보안 설정 추가
 본 설정 파일(`/etc/ssh/sshd_config`)을 직접 수정하지 않고, `sshd_config.d/` 폴더에 별도 파일을 추가했습니다.
@@ -69,7 +69,7 @@ sudo sshd -t && sudo systemctl restart ssh
 sudo sshd -T | grep -E 'passwordauthentication|permitrootlogin|kbdinteractive'
 ```
 
-<!-- 📸 After 캡처 (전부 no) -->
+<img width="788" height="228" alt="image" src="https://github.com/user-attachments/assets/f8a17980-899a-4906-a223-95bf6a303ea0" />
 
 ### [실습 5] 차단 검증
 노트북의 **새 탭**에서 일부러 키를 빼고 비밀번호로 접속을 시도했고, 비밀번호를 묻지도 않고 거부되는 것을 확인했습니다.
@@ -82,7 +82,7 @@ ssh www@127.0.0.1 -p 2222
 # → 비밀번호 없이 접속 성공
 ```
 
-<!-- 📸 Permission denied (publickey) 캡처 -->
+<img width="762" height="45" alt="image" src="https://github.com/user-attachments/assets/a0dd803a-d06e-47fc-8ff8-9752e1a25f57" />
 
 ### [실습 6] journalctl로 접속 기록 추적
 `journalctl`로 SSH 서비스의 로그만 걸러서, 오늘 작업이 시간 순서대로 남아 있는 것을 확인했습니다.
@@ -98,7 +98,7 @@ journalctl -u ssh --since "15 min ago" --no-pager
 | 13:21:30 | `Connection reset ... [preauth]` | 비밀번호 시도 거부 (인증 전 종료) |
 | 13:22:05 | `Accepted publickey for www` | 키로 정상 접속 |
 
-<!-- 📸 journalctl 캡처 -->
+<img width="1095" height="404" alt="image" src="https://github.com/user-attachments/assets/1199634a-6d64-481a-8742-1c4222ea250c" />
 
 ### [실습 7] 최신 명령어로 상태 점검
 예전 명령어(`netstat`, `ifconfig`, `service`) 대신 현재 표준 명령어로 서버 상태를 확인했습니다.
@@ -108,10 +108,14 @@ ss -tlnp
 ip -br a
 systemctl status ssh --no-pager
 ```
+<img width="1101" height="137" alt="image" src="https://github.com/user-attachments/assets/e437e798-30a7-4c0a-84f6-0d62dcdec974" />
 
-<!-- 📸 ss / ip / systemctl 캡처 -->
+<img width="1107" height="112" alt="image" src="https://github.com/user-attachments/assets/6aaa6cf4-0b51-43e4-90f8-19dfb32b4a1a" />
+
+<img width="1110" height="502" alt="image" src="https://github.com/user-attachments/assets/e449026b-d46d-4784-ae99-72aee533c3c4" />
 
 ---
+
 
 ## Troubleshooting (장애 대응 기록)
 
@@ -144,10 +148,3 @@ systemctl status ssh --no-pager
 - **`journalctl -u ssh --since "15 min ago"`**: 특정 서비스의 최근 로그만 조회
 - **`ss -tlnp`**: 대기 중인 TCP 포트와 프로세스 확인 (`netstat` 대체)
 - **`ip -br a`**: 네트워크 인터페이스·IP 요약 (`ifconfig` 대체)
-
----
-
-## 🇯🇵 오늘의 일본어 엔지니어링
-- **단어 1:** **公開鍵認証 (こうかいかぎにんしょう, 코-카이카기닌쇼-)** - 공개키 인증 (Public key authentication)
-- **단어 2:** **踏み台 (ふみだい, 후미다이)** - 발판 서버, 점프 서버 (Bastion host)
-- **단어 3:** **ログイン拒否 (ログインきょひ, 로그인쿄히)** - 로그인 거부 (Login denied)
