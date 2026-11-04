@@ -1,4 +1,4 @@
-# Day 03. systemd timer 자동 백업과 복구 훈련 (2026-11-04)
+<img width="847" height="149" alt="image" src="https://github.com/user-attachments/assets/0c0c730a-56c0-4192-9e83-6311636c034b" /># Day 03. systemd timer 자동 백업과 복구 훈련 (2026-11-04)
 
 ## 오늘의 목표
 - 웹 문서·Nginx 설정·SSH 설정을 **매일 자동으로 백업**하기
@@ -53,14 +53,18 @@ sudo ls -lh /var/backups/lab
 - `status=0/SUCCESS` — oneshot 서비스는 끝나면 `inactive (dead)`가 정상
 - `journalctl`에 `backup ok: ... (4.0K)` 기록
 
-<!-- 📸 status / journalctl / ls -->
+<img width="986" height="275" alt="image" src="https://github.com/user-attachments/assets/fda71366-bf84-49fa-8982-90c3cd8122d1" />
+
+<img width="1291" height="808" alt="image" src="https://github.com/user-attachments/assets/bf6ebb67-110d-4b71-83a1-57876ce09034" />
+
+<img width="957" height="80" alt="image" src="https://github.com/user-attachments/assets/7d23b01b-a906-4eb5-8f9d-6f6e7c8258ee" />
 
 ```bash
-sudo sh -c 'tar -tzf $(ls -1t /var/backups/lab/*.tar.gz | head -1)'   # 가장 최근 백업
+sudo tar -tzf /var/backups/lab/lab-20261104-131539.tar.gz
 ```
 백업 안에 `var/www/lab/index.html`, `etc/nginx/sites-available/lab`, `etc/ssh/sshd_config.d/10-hardening.conf` 포함 확인.
 
-<!-- 📸 tar -tzf -->
+<img width="1161" height="125" alt="image" src="https://github.com/user-attachments/assets/b89171ce-0ce8-47ab-be94-073b58dac966" />
 
 ### [실습 3] 타이머 활성화
 ```bash
@@ -69,7 +73,9 @@ systemctl list-timers lab-backup.timer --no-pager
 systemd-analyze calendar "*-*-* 03:00:00"
 ```
 
-<!-- 📸 list-timers (NEXT: 다음날 03:00~03:10) -->
+<img width="994" height="121" alt="image" src="https://github.com/user-attachments/assets/3b1691f0-54f3-446d-a190-d42c9328eea1" />
+
+<img width="972" height="133" alt="image" src="https://github.com/user-attachments/assets/51954840-4b15-4259-bc99-2291c9c23b33" />
 
 ### [실습 4] 복구 훈련
 웹 페이지를 일부러 삭제하고, 최신 백업에서 **그 파일만** 원래 위치로 복구했습니다.
@@ -84,8 +90,11 @@ curl -i localhost                 # 200 OK
 ```
 tar가 소유자·권한·수정 시각까지 저장하기 때문에 파일이 **원래 상태 그대로** 돌아온 것을 확인했습니다.
 
-<!-- 📸 삭제 후 403 -->
-<!-- 📸 복구 후 ls -l + curl 200 -->
+<img width="771" height="115" alt="image" src="https://github.com/user-attachments/assets/6bbbf31d-a91b-437f-9777-277969c4f6ff" />
+
+<img width="824" height="38" alt="image" src="https://github.com/user-attachments/assets/89211060-24a1-4f51-9a88-d5766cb854e8" />
+
+<img width="741" height="211" alt="image" src="https://github.com/user-attachments/assets/6c89bf31-0eab-48b3-a4c3-1eaaad2159c0" />
 
 ### [실습 5] 보관 개수(7개) 확인
 ```bash
@@ -96,7 +105,9 @@ sudo ls /var/backups/lab | wc -l   # 7
 ```
 기존 1개 + 8개 생성 = 9개 중 오래된 2개가 자동 삭제되어 **최근 7개만 유지**됨 (가장 오래된 `131539` 삭제 확인).
 
-<!-- 📸 ls -1t / wc -l -->
+<img width="825" height="149" alt="image" src="https://github.com/user-attachments/assets/388252f2-3aa5-416d-a536-a3cf18c83ffe" />
+
+<img width="897" height="37" alt="image" src="https://github.com/user-attachments/assets/49c60c2b-2516-4145-aed8-6c680a7868a9" />
 
 ---
 
@@ -130,9 +141,3 @@ sudo ls /var/backups/lab | wc -l   # 7
 - **`systemctl reset-failed <service>`**: 시작 횟수 제한 해제
 - **`tar -czf` / `tar -tzf` / `tar -xzf ... -C / <경로>`**: 백업 생성 / 내용 확인 / 특정 파일만 복구
 
----
-
-## 🇯🇵 오늘의 일본어 엔지니어링
-- **단어 1:** **バックアップ (밧쿠앗푸)** - 백업 (Backup)
-- **단어 2:** **リストア (리스토아)** - 복원 (Restore)
-- **단어 3:** **定期実行 (ていきじっこう, 테-키짓코-)** - 정기 실행 (Scheduled execution)
