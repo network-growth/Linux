@@ -1,0 +1,150 @@
+# Day 04 - Day 01~03에서 손으로 만든 서버를 코드로 정의
+# 실행: ansible-playbook playbook.yml -K
+---
+- name: Lab web server
+  hosts: web
+  become: true
+
+  vars:
+    web_owner: www
+    web_root: /var/www/lab
+    repo_root: "{{ playbook_dir }}/.."
+
+  tasks:
+    # ---------- Day 01: SSH 보안 ----------
+    - name: SSH 보안 설정 배치
+      ansible.builtin.copy:
+        src: "{{ repo_root }}/day1-ssh-hardening/10-hardening.conf"
+        dest: /etc/ssh/sshd_config.d/10-hardening.conf
+        owner: root
+        group: root
+        mode: "0644"
+      notify: restart ssh
+
+    # ---------- Day 02: Nginx ----------
+    - name: 패키지 설치
+      ansible.builtin.apt:
+        name: [nginx, ufw]
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: 사이트 폴더
+      ansible.builtin.file:
+        path: "{{ web_root }}"
+        state: directory
+        owner: "{{ web_owner }}"
+        group: "{{ web_owner }}"
+        mode: "0755"
+
+    - name: 페이지
+      ansible.builtin.template:
+        src: templates/index.html.j2
+        dest: "{{ web_root }}/index.html"
+        owner: "{{ web_owner }}"
+        group: "{{ web_owner }}"
+        mode: "0644"
+
+    - name: Nginx 사이트 설정
+      ansible.builtin.copy:
+        src: "{{ repo_root }}/day2-manual-setup/lab"
+        dest: /etc/nginx/sites-available/lab
+        owner: root
+        group: root
+        mode: "0644"
+      notify: reload nginx
+
+    - name: 기본 사이트 끄기
+      ansible.builtin.file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      notify: reload nginx
+
+    - name: 내 사이트 켜기
+      ansible.builtin.file:
+        src: /etc/nginx/sites-available/lab
+        dest: /etc/nginx/sites-enabled/lab
+        state: link
+      notify: reload nginx
+
+    - name: Nginx 실행 + 부팅 시 자동 시작
+      ansible.builtin.systemd_service:
+        name: nginx
+        state: started
+        enabled: true
+
+    # ---------- Day 02: 방화벽 (SSH 규칙을 enable보다 먼저) ----------
+    - name: 기본 정책 - 들어오는 연결 차단
+      community.general.ufw:
+        default: deny
+        direction: incoming
+
+    - name: 기본 정책 - 나가는 연결 허용
+      community.general.ufw:
+        default: allow
+        direction: outgoing
+
+    - name: SSH 허용 + 접속 횟수 제한
+      community.general.ufw:
+        rule: limit
+        name: OpenSSH
+
+    - name: HTTP 허용
+      community.general.ufw:
+        rule: allow
+        name: Nginx HTTP
+
+    - name: 방화벽 켜기
+      community.general.ufw:
+        state: enabled
+
+    # ---------- Day 03: systemd 백업 ----------
+    - name: 백업 스크립트
+      ansible.builtin.copy:
+        src: "{{ repo_root }}/day3-systemd-backup/lab-backup.sh"
+        dest: /usr/local/sbin/lab-backup.sh
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: 백업 service / timer 유닛
+      ansible.builtin.copy:
+        src: "{{ repo_root }}/day3-systemd-backup/{{ item }}"
+        dest: "/etc/systemd/system/{{ item }}"
+        owner: root
+        group: root
+        mode: "0644"
+      loop:
+        - lab-backup.service
+        - lab-backup.timer
+
+    - name: 백업 타이머 켜기
+      ansible.builtin.systemd_service:
+        name: lab-backup.timer
+        state: started
+        enabled: true
+        daemon_reload: true
+
+  handlers:
+    # 같은 이름(listen)으로 묶인 핸들러는 적힌 순서대로 실행: 검사 → 반영
+    - name: check sshd
+      ansible.builtin.command: sshd -t
+      changed_when: false
+      listen: restart ssh
+
+    - name: restart sshd service
+      ansible.builtin.systemd_service:
+        name: ssh
+        state: restarted
+      listen: restart ssh
+
+    - name: check nginx
+      ansible.builtin.command: nginx -t
+      changed_when: false
+      listen: reload nginx
+
+    - name: reload nginx service
+      ansible.builtin.systemd_service:
+        name: nginx
+        state: reloaded
+      listen: reload nginx
