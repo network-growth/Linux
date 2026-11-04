@@ -88,3 +88,4 @@
 |---|---|---|
 | [Day 01](06-Infrastructure-as-Code/Daily-log/Day-01.md) | SSH 키 인증 및 서버 접속 보안 설정 | 2026-11-03 |
 | [Day 02](06-Infrastructure-as-Code/Daily-log/Day-02.md) | Nginx 웹 서버와 UFW 방화벽 수동 구성 | 2026-11-04 |
+| [Day 03](06-Infrastructure-as-Code/Daily-log/Day-03.md) | systemd timer 자동 백업과 복구 훈련 | 2026-11-04 |
