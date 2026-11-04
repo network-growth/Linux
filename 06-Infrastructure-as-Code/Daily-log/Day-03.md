@@ -1,5 +1,3 @@
-<img width="847" height="149" alt="image" src="https://github.com/user-attachments/assets/0c0c730a-56c0-4192-9e83-6311636c034b" /># Day 03. systemd timer 자동 백업과 복구 훈련 (2026-11-04)
-
 ## 오늘의 목표
 - 웹 문서·Nginx 설정·SSH 설정을 **매일 자동으로 백업**하기
 - 예전 Crontab 방식 대신 요즘 표준인 **systemd service + timer** 사용하기
