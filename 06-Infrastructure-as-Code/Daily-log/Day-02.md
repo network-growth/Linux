@@ -25,7 +25,7 @@ sudo apt install -y nginx ufw
 systemctl status nginx --no-pager
 ```
 
-<!-- 📸 systemctl status nginx (active running) -->
+<img width="1037" height="307" alt="스크린샷 2026-11-04 110747" src="https://github.com/user-attachments/assets/9e6aeb49-8fe7-4ba3-9e64-ed4bc519d6c3" />
 
 ### [실습 2] 사이트 폴더와 페이지 생성
 `install -d`로 폴더 생성·소유자·권한 지정을 한 번에 처리했습니다. 폴더 주인을 로그인 계정(`www`)으로 두어 `sudo` 없이 페이지를 수정할 수 있게 하고, Nginx(`www-data`)는 읽기 권한만 갖도록 했습니다.
@@ -60,7 +60,7 @@ ls -l /etc/nginx/sites-enabled/
 | `access_log` / `error_log` | 사이트 전용 로그 파일 분리 |
 | `try_files $uri $uri/ =404` | 파일 → 폴더 순서로 찾고 없으면 404 |
 
-<!-- 📸 ls -l /etc/nginx/sites-enabled/ (lab -> sites-available/lab) -->
+<img width="763" height="71" alt="스크린샷 2026-11-04 112212" src="https://github.com/user-attachments/assets/e0013984-1142-47d0-b660-a4cf268db584" />
 
 ### [실습 4] 문법 검사 후 반영
 Day 01의 `sshd -t`와 같은 패턴으로, 검사를 통과했을 때만 반영했습니다. 웹 서버는 접속을 끊지 않는 `reload`를 사용했습니다.
@@ -69,7 +69,7 @@ Day 01의 `sshd -t`와 같은 패턴으로, 검사를 통과했을 때만 반영
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-<!-- 📸 nginx -t (syntax is ok / test is successful) -->
+<img width="563" height="84" alt="스크린샷 2026-11-04 112259" src="https://github.com/user-attachments/assets/b4b78222-6088-4441-b52c-da41a6dc7dcf" />
 
 ### [실습 5] 서버 내부 응답 확인
 ```bash
@@ -79,7 +79,7 @@ curl -i localhost
 - `Server: nginx` — 버전 번호가 없어 `server_tokens off` 적용 확인
 - `Content-Length: 59` — 작성한 `index.html` 크기와 일치
 
-<!-- 📸 curl -i localhost -->
+<img width="455" height="247" alt="스크린샷 2026-11-04 112311" src="https://github.com/user-attachments/assets/57ed6a45-2463-4be1-95b8-6a1ef5e8e762" />
 
 ### [실습 6] UFW 방화벽 구성
 SSH 접속이 끊기지 않도록 **SSH 허용 규칙을 먼저** 넣고 방화벽을 켰습니다.
@@ -100,7 +100,7 @@ sudo ufw status verbose
 | `limit OpenSSH` | 22번 허용, 30초 안에 6회 이상 접속 시도 시 차단 |
 | `allow 'Nginx HTTP'` | 80번만 허용 |
 
-<!-- 📸 ufw status verbose -->
+<img width="556" height="215" alt="스크린샷 2026-11-04 112702" src="https://github.com/user-attachments/assets/925fad6b-c5de-43ba-b688-f08447c8fcce" />
 
 ### [실습 7] 노트북 브라우저 접속
 VirtualBox NAT 포트 포워딩에 `127.0.0.1:8080 → VM 80` 규칙을 추가하고 노트북 브라우저에서 접속했습니다.
@@ -109,7 +109,7 @@ VirtualBox NAT 포트 포워딩에 `127.0.0.1:8080 → VM 80` 규칙을 추가�
 |---|---|---|---|
 | http | 127.0.0.1 | 8080 | 80 |
 
-<!-- 📸 브라우저 http://127.0.0.1:8080 -->
+<img width="1917" height="943" alt="스크린샷 2026-11-04 112946" src="https://github.com/user-attachments/assets/f3aa2e22-2143-492e-96c9-af3a8b1641ac" />
 
 ### [실습 8] 접속 로그 확인
 ```bash
@@ -117,7 +117,7 @@ sudo tail -n 5 /var/log/nginx/lab.access.log
 ```
 브라우저 접속이 `10.0.2.2`(VirtualBox NAT 게이트웨이 = 노트북)에서 온 `GET / 200`으로 기록됨.
 
-<!-- 📸 lab.access.log -->
+<img width="1278" height="76" alt="image" src="https://github.com/user-attachments/assets/f0faf2cf-643a-4070-8d66-8e17a3f6b3a3" />
 
 ### [실습 9] 최종 상태 점검
 ```bash
@@ -127,7 +127,13 @@ sudo ufw status verbose
 ls -l /etc/nginx/sites-enabled/
 ```
 
-<!-- 📸 최종 상태 -->
+<img width="469" height="53" alt="image" src="https://github.com/user-attachments/assets/c3bfef6b-be97-4d1e-b377-da79f10e1c51" />
+
+<img width="1124" height="88" alt="image" src="https://github.com/user-attachments/assets/26c0bfa9-9b86-4bb6-b0f6-7050c6baa7d1" />
+
+<img width="566" height="209" alt="image" src="https://github.com/user-attachments/assets/8f811f22-969b-4ea0-a6f3-5fe22dd4601b" />
+
+<img width="668" height="61" alt="image" src="https://github.com/user-attachments/assets/7e2d78c3-1bde-4404-ba89-186208212254" />
 
 ---
 
@@ -167,10 +173,3 @@ ls -l /etc/nginx/sites-enabled/
 - **`ufw default` / `limit` / `allow` / `enable`**: 방화벽 기본 정책과 규칙
 - **`ufw app list`**: 사용할 수 있는 앱 프로필 이름 확인
 - **`ss -tlnp`**: 대기 중인 포트와 프로세스 확인
-
----
-
-## 🇯🇵 오늘의 일본어 엔지니어링
-- **단어 1:** **手順書 (てじゅんしょ, 테쥰쇼)** - 작업 절차서 (Runbook)
-- **단어 2:** **疎通確認 (そつうかくにん, 소츠-카쿠닌)** - 통신 확인 (Connectivity check)
-- **단어 3:** **シンボリックリンク (신보릿쿠링쿠)** - 심볼릭 링크 (Symbolic link)
