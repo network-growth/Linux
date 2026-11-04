@@ -1,0 +1,22 @@
+# Day 02 - Nginx 사이트 설정
+# 위치: /etc/nginx/sites-available/lab
+# 활성화: /etc/nginx/sites-enabled/lab -> /etc/nginx/sites-available/lab (심볼릭 링크)
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+
+    root /var/www/lab;
+    index index.html;
+
+    # 응답 헤더에서 Nginx 버전 숨기기
+    server_tokens off;
+
+    access_log /var/log/nginx/lab.access.log;
+    error_log  /var/log/nginx/lab.error.log;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
