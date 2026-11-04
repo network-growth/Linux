@@ -56,7 +56,7 @@ sudo ls -lh /var/backups/lab
 <!-- 📸 status / journalctl / ls -->
 
 ```bash
-sudo tar -tzf /var/backups/lab/lab-20261104-131539.tar.gz
+sudo sh -c 'tar -tzf $(ls -1t /var/backups/lab/*.tar.gz | head -1)'   # 가장 최근 백업
 ```
 백업 안에 `var/www/lab/index.html`, `etc/nginx/sites-available/lab`, `etc/ssh/sshd_config.d/10-hardening.conf` 포함 확인.
 
