@@ -1,0 +1,7 @@
+# 위치: /etc/systemd/system/lab-backup.service
+[Unit]
+Description=Backup lab website and server config
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/lab-backup.sh
