@@ -46,9 +46,21 @@ sudo bash ../day5-idempotency/break-server.sh
 
 3번은 `lab`과 `default`가 둘 다 `default_server`를 선언해 충돌한 것입니다. reload를 하지 않았기 때문에 Nginx는 **이전 설정으로 계속 동작**하고, `nginx -t`는 "지금 반영하면 실패한다"는 경고 역할을 합니다.
 
-<!-- 📸 break-server.sh 실행 -->
-<!-- 📸 증상 확인 (curl / ls / nginx -t / ufw / sshd -T / is-enabled) -->
-<!-- 📸 브라우저 접속 불가 -->
+<img width="1134" height="216" alt="스크린샷 2026-11-05 130341" src="https://github.com/user-attachments/assets/4c3e0285-1100-47b4-b57b-9b5a8a627f3e" />
+
+<img width="730" height="43" alt="스크린샷 2026-11-05 130404" src="https://github.com/user-attachments/assets/675707e8-e10d-4ee0-bbb1-fb0ebab6dd78" />
+
+<img width="789" height="43" alt="스크린샷 2026-11-05 130420" src="https://github.com/user-attachments/assets/0f2ccb48-d0a0-4089-bd5c-d6684436d402" />
+
+<img width="1065" height="59" alt="스크린샷 2026-11-05 130444" src="https://github.com/user-attachments/assets/293e38b2-8597-45b5-9a92-3dc6d3d7692b" />
+
+<img width="752" height="155" alt="스크린샷 2026-11-05 130505" src="https://github.com/user-attachments/assets/7df8ca76-2460-4b6f-ba38-8a2d49a61b56" />
+
+<img width="1015" height="48" alt="스크린샷 2026-11-05 130545" src="https://github.com/user-attachments/assets/4bac370f-8261-4def-b868-49cfd6e92332" />
+
+<img width="958" height="40" alt="스크린샷 2026-11-05 130602" src="https://github.com/user-attachments/assets/ecbfb65a-3595-41bf-aeeb-be9a190580bc" />
+
+<img width="1916" height="1030" alt="스크린샷 2026-11-05 130632" src="https://github.com/user-attachments/assets/3c9cd32b-e4a5-4572-ac67-9b56c6dd2071" />
 
 ### [실습 3] 드리프트 탐지
 ```bash
@@ -65,7 +77,7 @@ ansible-playbook playbook.yml -K --check --diff
 | HTTP 허용 | 규칙 없음 → 추가 |
 | 백업 타이머 켜기 | disabled → enabled |
 
-<!-- 📸 --check --diff 결과 -->
+<img width="1099" height="576" alt="스크린샷 2026-11-05 130852" src="https://github.com/user-attachments/assets/8e4410f0-5c1a-419a-86ae-da00468d9abd" />
 
 ### [실습 4] 플레이북으로 복구
 ```bash
@@ -75,7 +87,7 @@ ansible-playbook playbook.yml -K
 - SSH 설정이 바뀌어 `check sshd` → `restart sshd service` 핸들러 실행
 - default 링크를 **먼저 삭제한 뒤** `check nginx`(`nginx -t`)가 실행되어 검사를 통과하고 reload까지 정상 진행 → 태스크와 핸들러 실행 순서의 의미를 확인
 
-<!-- 📸 복구 PLAY RECAP + RUNNING HANDLER -->
+<img width="1102" height="585" alt="스크린샷 2026-11-05 131412" src="https://github.com/user-attachments/assets/af9711e3-5d3f-471e-97d9-b6e91d1b840b" />
 
 ### [실습 5] 복구 확인과 멱등성 재확인
 ```bash
@@ -88,9 +100,21 @@ systemctl is-enabled lab-backup.timer             # enabled
 ansible-playbook playbook.yml -K                  # changed=0
 ```
 
-<!-- 📸 복구 후 증상 확인 -->
-<!-- 📸 브라우저 접속 복구 -->
-<!-- 📸 다시 실행 PLAY RECAP (changed=0) -->
+<img width="739" height="62" alt="스크린샷 2026-11-05 131033" src="https://github.com/user-attachments/assets/2e620c00-69c7-42b5-9bfd-84297d31a44d" />
+
+<img width="780" height="44" alt="스크린샷 2026-11-05 131044" src="https://github.com/user-attachments/assets/17a192d7-c4cc-4155-96ce-2c5962c33705" />
+
+<img width="748" height="60" alt="스크린샷 2026-11-05 131059" src="https://github.com/user-attachments/assets/8dac65b1-0728-462f-9110-5c96289107b8" />
+
+<img width="759" height="188" alt="스크린샷 2026-11-05 131111" src="https://github.com/user-attachments/assets/63e8852d-9f08-46fa-9459-d2342a096196" />
+
+<img width="1004" height="46" alt="스크린샷 2026-11-05 131133" src="https://github.com/user-attachments/assets/c86eafc2-3e94-4db6-adf9-888cf2f131c1" />
+
+<img width="945" height="45" alt="스크린샷 2026-11-05 131154" src="https://github.com/user-attachments/assets/15382a08-e9cd-4a40-a75f-713a494f32b4" />
+
+<img width="1914" height="942" alt="스크린샷 2026-11-05 131205" src="https://github.com/user-attachments/assets/0cfd38db-c409-489a-9cef-2087d21ac6d3" />
+
+<img width="1102" height="585" alt="스크린샷 2026-11-05 131412" src="https://github.com/user-attachments/assets/62880ee8-f28a-4a8b-b3fd-c4b8e157bf5f" />
 
 ### [실습 6] 코드가 모르는 변경 — Ansible의 한계
 플레이북이 관리하지 않는 **새 파일**로 SSH 비밀번호 로그인을 열어 보았습니다.
@@ -118,8 +142,10 @@ sudo sshd -T | grep passwordauthentication     # no
 | 코드에 없는 변경은 탐지 못 함 | 서버를 직접 수정하지 않고, 바꿀 것은 코드로 바꾸기 |
 | 설정 디렉터리에 파일 하나만 추가해도 보안이 무력화됨 | 중요한 디렉터리는 "허용된 파일만 존재해야 함"까지 코드로 관리하는 방안 고려 |
 
-<!-- 📸 00-bad.conf 실험 (sshd -T yes / --check changed=0) -->
-<!-- 📸 원복 후 sshd -T no -->
+
+<img width="1113" height="183" alt="image" src="https://github.com/user-attachments/assets/f475bb07-ec3a-4ca8-a106-047bcf101d80" />
+
+<img width="1020" height="118" alt="image" src="https://github.com/user-attachments/assets/a85faf27-4263-4782-8d20-d38970f00b0c" />
 
 ---
 
@@ -138,10 +164,3 @@ sudo sshd -T | grep passwordauthentication     # no
 - **`nginx -t`**: 반영 전 설정 충돌 확인 (`duplicate default server`)
 - **`sshd -T`**: SSH 데몬이 실제로 적용 중인 최종 설정
 - **`systemctl is-enabled`**: 부팅 시 자동 시작 여부
-
----
-
-## 🇯🇵 오늘의 일본어 엔지니어링
-- **단어 1:** **構成ドリフト (こうせいドリフト, 코-세-도리후토)** - 구성 드리프트 (Configuration drift)
-- **단어 2:** **差分 (さぶん, 사분)** - 차분, 변경 차이 (Diff)
-- **단어 3:** **復旧 (ふっきゅう, 훗큐-)** - 복구 (Recovery)
