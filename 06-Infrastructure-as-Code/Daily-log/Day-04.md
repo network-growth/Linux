@@ -34,7 +34,7 @@ ansible --version
 ansible-galaxy collection list community.general
 ```
 
-<!-- 📸 ansible --version -->
+<img width="941" height="165" alt="image" src="https://github.com/user-attachments/assets/e2efa292-3e04-416a-ab15-06fde5402b63" />
 
 ### [실습 2] 인벤토리와 연결 확인
 ```ini
@@ -48,7 +48,7 @@ ansible-inventory --graph
 ansible web -m ping        # localhost | SUCCESS => "ping": "pong"
 ```
 
-<!-- 📸 ansible web -m ping -->
+<img width="733" height="128" alt="image" src="https://github.com/user-attachments/assets/363570d4-1cb9-4db1-9d52-85f06ea09ff7" />
 
 ### [실습 3] 플레이북 구조
 Day 01~03 폴더의 설정 파일을 그대로 가져다 쓰도록 작성해, **설정 원본은 한 곳**에만 두었습니다.
@@ -81,7 +81,7 @@ ansible-playbook playbook.yml --syntax-check
 ansible-playbook playbook.yml --list-tasks     # 태스크 16개
 ```
 
-<!-- 📸 --list-tasks -->
+<img width="1021" height="421" alt="image" src="https://github.com/user-attachments/assets/0a31817c-48d7-49af-aabc-af4148cfe597" />
 
 ### [실습 4] 드라이런으로 드리프트 확인
 ```bash
@@ -92,7 +92,7 @@ ansible-playbook playbook.yml -K --check --diff
 - 손으로 만든 서버와 Git의 코드가 **어디가 다른지 실제로 바꾸기 전에** 줄 단위로 확인할 수 있었음
 - 드라이런에서는 `command` 모듈이 실행되지 않아 `check sshd`, `check nginx` 핸들러가 `skipping`으로 표시됨
 
-<!-- 📸 --check --diff 결과 -->
+<img width="1105" height="575" alt="image" src="https://github.com/user-attachments/assets/2c77ab34-5440-4dee-b88c-8d7f475e92ce" />
 
 ### [실습 5] 실제 적용
 ```bash
@@ -111,8 +111,9 @@ curl localhost
 | 페이지 | `Iac - manual setup` | `Iac - built by Ansible` |
 | 만든 방법 | `printf`로 직접 작성 | `template` 모듈 + 변수 |
 
-<!-- 📸 PLAY RECAP (실제 적용) -->
-<!-- 📸 curl localhost / 브라우저 127.0.0.1:8080 -->
+<img width="1108" height="575" alt="스크린샷 2026-11-05 110821" src="https://github.com/user-attachments/assets/4ce452f8-ce18-409a-a078-d7a25821c651" />
+
+<img width="1916" height="936" alt="스크린샷 2026-11-05 110622" src="https://github.com/user-attachments/assets/f3c57e1b-3a45-46d7-9932-abb225417166" />
 
 ### [실습 6] 멱등성 확인
 같은 플레이북을 한 번 더 실행해, 서버가 이미 코드와 같은 상태이므로 **아무것도 바뀌지 않는 것**(`changed=0`)을 확인했습니다. 바뀐 것이 없으니 핸들러도 실행되지 않습니다.
@@ -121,7 +122,7 @@ curl localhost
 ansible-playbook playbook.yml -K   # changed=0 failed=0
 ```
 
-<!-- 📸 두 번째 실행 PLAY RECAP -->
+<img width="1105" height="575" alt="스크린샷 2026-11-05 111611" src="https://github.com/user-attachments/assets/a6d95c8a-acf6-4b52-850a-b50f005eded7" />
 
 ---
 
@@ -141,8 +142,10 @@ ansible-playbook playbook.yml -K   # changed=0 failed=0
   become_exe = sudo.ws
   ```
 - **배운 점**: OS의 기본 도구가 바뀌면 그 도구를 감싸서 쓰는 자동화 도구가 영향을 받을 수 있음. 바꿀 범위를 최소로(이 프로젝트의 설정 파일에만) 두는 것이 안전함
+  
+<img width="1334" height="315" alt="스크린샷 2026-11-05 105636" src="https://github.com/user-attachments/assets/c10bcd31-3e9a-430c-9e93-e62f269d9bb4" />
 
-<!-- 📸 timeout 에러 / sudo --version -->
+<img width="877" height="41" alt="image" src="https://github.com/user-attachments/assets/78d02a52-96d0-4918-bb32-eb92d5ff9f01" />
 
 ### 문제 2. `Duplicate become password prompt` / `Sorry, try again`
 - **상황**: VirtualBox 콘솔 창에서 실행 시 sudo가 비밀번호를 다시 묻고 Ansible이 실패 처리
@@ -166,10 +169,3 @@ ansible-playbook playbook.yml -K   # changed=0 failed=0
 - **`ansible-playbook <파일> -K --check --diff`**: 실제 변경 없이 바뀔 내용만 미리보기
 - **`ansible-playbook <파일> -K`**: 실제 적용 (`-K`: sudo 비밀번호 입력)
 - **`become_exe`**: Ansible이 권한 상승에 쓸 실행 파일 지정
-
----
-
-## 🇯🇵 오늘의 일본어 엔지니어링
-- **단어 1:** **構成管理 (こうせいかんり, 코-세-칸리)** - 구성 관리 (Configuration management)
-- **단어 2:** **冪等性 (べきとうせい, 베키토-세-)** - 멱등성 (Idempotency)
-- **단어 3:** **ドライラン (도라이란)** - 드라이런, 사전 실행 (Dry run)
