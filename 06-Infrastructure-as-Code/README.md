@@ -33,7 +33,7 @@
 | Day 01 | SSH 보안 설정 | [day1-ssh-hardening](day1-ssh-hardening) | [Day-01](Daily-log/Day-01.md) · 2026-11-03 |
 | Day 02 | Nginx·UFW 수동 구성 | [day2-manual-setup](day2-manual-setup) | [Day-02](Daily-log/Day-02.md) · 2026-11-04 |
 | Day 03 | systemd 타이머 백업·복구 | [day3-systemd-backup](day3-systemd-backup) | [Day-03](Daily-log/Day-03.md) · 2026-11-04 |
-| Day 04 | Ansible 코드화 | [day4-ansible](day4-ansible) | |
+| Day 04 | Ansible 코드화 | [day4-ansible](day4-ansible) | [Day-04](Daily-log/Day-04.md) · 2026-11-05 |
 | Day 05 | 멱등성·드리프트 테스트 | [day5-idempotency](day5-idempotency) | |
 | Day 06 | 새 서버 재구축 검증 | [day6-rebuild](day6-rebuild) | |
 
