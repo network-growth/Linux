@@ -90,3 +90,4 @@
 | [Day 02](06-Infrastructure-as-Code/Daily-log/Day-02.md) | Nginx 웹 서버와 UFW 방화벽 수동 구성 | 2026-11-04 |
 | [Day 03](06-Infrastructure-as-Code/Daily-log/Day-03.md) | systemd timer 자동 백업과 복구 훈련 | 2026-11-04 |
 | [Day 04](06-Infrastructure-as-Code/Daily-log/Day-04.md) | Ansible로 서버 구성 코드화 | 2026-11-05 |
+| [Day 05](06-Infrastructure-as-Code/Daily-log/Day-05.md) | 드리프트 탐지와 플레이북 복구, 멱등성 검증 | 2026-11-05 |
