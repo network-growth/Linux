@@ -35,6 +35,11 @@
 | Day 03 | systemd 타이머 백업·복구 | [day3-systemd-backup](day3-systemd-backup) | [Day-03](Daily-log/Day-03.md) · 2026-11-04 |
 | Day 04 | Ansible 코드화 | [day4-ansible](day4-ansible) | [Day-04](Daily-log/Day-04.md) · 2026-11-05 |
 | Day 05 | 멱등성·드리프트 테스트 | [day5-idempotency](day5-idempotency) | [Day-05](Daily-log/Day-05.md) · 2026-11-05 |
-| Day 06 | 새 서버 재구축 검증 | [day6-rebuild](day6-rebuild) | |
+| Day 06 | 새 서버 재구축 검증 | [day6-rebuild](day6-rebuild) | [Day-06](Daily-log/Day-06.md) · 2026-11-06 |
 
 > 매일 기록은 [Daily-log](Daily-log)에 작성
+
+## 결과
+- 손으로 구성한 서버(Day 01~03)를 Ansible 플레이북 하나로 정의 (Day 04)
+- 일부러 만든 설정 차이 6개를 플레이북으로 탐지·복구 (Day 05)
+- 새 서버 `web02`를 플레이북 한 번으로 같은 상태로 구축, 두 서버 모두 재실행 시 `changed=0` (Day 06)

@@ -19,7 +19,7 @@
 | [03. 인프라 아키텍처](#03-인프라-아키텍처) | Day 01 ~ 02 |
 | [04. 컨테이너(Docker)](#04-컨테이너docker) | Day 01 ~ 05 |
 | [05. 보안 심화 프로젝트](#05-보안-심화-프로젝트) | Day 01 ~ 07 |
-| [06. Infrastructure as Code](06-Infrastructure-as-Code/README.md) | 진행 중 (2026-11 ~) |
+| [06. Infrastructure as Code](06-Infrastructure-as-Code/README.md) | Day 01 ~ 06 |
 
 ### 01. 리눅스 기초
 
@@ -91,3 +91,4 @@
 | [Day 03](06-Infrastructure-as-Code/Daily-log/Day-03.md) | systemd timer 자동 백업과 복구 훈련 | 2026-11-04 |
 | [Day 04](06-Infrastructure-as-Code/Daily-log/Day-04.md) | Ansible로 서버 구성 코드화 | 2026-11-05 |
 | [Day 05](06-Infrastructure-as-Code/Daily-log/Day-05.md) | 드리프트 탐지와 플레이북 복구, 멱등성 검증 | 2026-11-05 |
+| [Day 06](06-Infrastructure-as-Code/Daily-log/Day-06.md) | 새 서버 재구축 검증 — 플레이북으로 서버 찍어내기 | 2026-11-06 |
