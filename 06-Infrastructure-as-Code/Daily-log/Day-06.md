@@ -44,8 +44,9 @@ ip -br a
 # enp0s8  UP  192.168.56.101/24  ← Host-only
 ```
 
-<!-- 📸 VirtualBox 호스트 전용 네트워크 (192.168.56.1/24, DHCP 사용함) -->
-<!-- 📸 ubuntu-server ip -br a -->
+<img width="1909" height="1032" alt="스크린샷 2026-11-06 105847" src="https://github.com/user-attachments/assets/655d4126-56cc-4afe-a46e-783a7711e616" />
+
+<img width="1009" height="70" alt="image" src="https://github.com/user-attachments/assets/55d94231-2c6d-4be5-b8ba-08e9141304fe" />
 
 ### [실습 2] 새 서버 web02 설치
 설치 전에 어댑터 2를 켜두어 설치 프로그램이 두 랜카드를 모두 DHCP로 잡도록 했습니다. 플레이북과 맞추기 위해 사용자 이름은 `www`, 서버 이름은 `web02`로 지정했고, 그 외에는 **아무 설정도 하지 않았습니다.**
@@ -60,7 +61,7 @@ ip -br a
 ip -br a     # enp0s8  192.168.56.102/24
 ```
 
-<!-- 📸 web02 ip -br a -->
+<img width="1012" height="70" alt="image" src="https://github.com/user-attachments/assets/1bf9908b-ab60-4206-9384-e2a81b81b77c" />
 
 ### [실습 3] 제어 노드 → web02 SSH 키 등록
 플레이북이 web02의 비밀번호 로그인을 막기 때문에, **적용 전에 키를 먼저** 등록했습니다. Day 01은 노트북 → 서버였고, 이번엔 서버 → 서버입니다.
@@ -71,7 +72,11 @@ ssh-copy-id www@192.168.56.102
 ssh www@192.168.56.102 hostname      # web02 (비밀번호 없이)
 ```
 
-<!-- 📸 ssh-keygen / ssh-copy-id / hostname -->
+<img width="818" height="37" alt="image" src="https://github.com/user-attachments/assets/15f5163f-87bb-445a-ab7f-4d5f2956b0c9" />
+
+<img width="1045" height="122" alt="image" src="https://github.com/user-attachments/assets/c87c0212-fc1f-4360-82fc-8226268b92d9" />
+
+<img width="904" height="45" alt="image" src="https://github.com/user-attachments/assets/5fac3f5c-3e71-4b0b-bf82-952145c0d749" />
 
 ### [실습 4] 인벤토리 확장
 ```ini
@@ -85,7 +90,7 @@ ansible web -m ping     # localhost, web02 모두 pong
 ```
 `web02`는 `ansible_connection`이 없으므로 기본값인 SSH로 접속하며, 대상 서버의 파이썬(`/usr/bin/python3.14`)을 자동으로 찾았습니다.
 
-<!-- 📸 ansible web -m ping -->
+<img width="784" height="290" alt="image" src="https://github.com/user-attachments/assets/18708dcb-ebf5-4b23-a993-3ad06b154d7c" />
 
 ### [실습 5] 플레이북으로 web02 찍어내기
 ```bash
@@ -95,8 +100,7 @@ ansible-playbook playbook.yml -K --limit web02
 - 빈 서버에는 `--check`를 쓰지 않음 — "Nginx 설치 → Nginx 실행"처럼 앞 단계 결과에 기대는 태스크는 드라이런으로 예측할 수 없기 때문
 - 한 번 더 실행했을 때 `web02 : ok=17 changed=0 failed=0`
 
-<!-- 📸 web02 첫 적용 PLAY RECAP -->
-<!-- 📸 web02 재실행 PLAY RECAP (changed=0) -->
+<img width="1908" height="1007" alt="스크린샷 2026-11-06 134744" src="https://github.com/user-attachments/assets/176b26fc-8f0a-4bfd-97f7-54b1c5423b52" />
 
 ### [실습 6] web02 결과 확인
 ```bash
@@ -109,8 +113,11 @@ ansible web02 -b -K -m command -a "ufw status"      # OpenSSH LIMIT / Nginx HTTP
 ```
 같은 템플릿이 서버마다 이름을 다르게 채워 넣어, web02에서는 `host: web02`가 출력됩니다. Day 01의 SSH 보안 설정과 Day 02의 방화벽도 그대로 적용되었습니다.
 
-<!-- 📸 curl / Permission denied / ufw status -->
-<!-- 📸 노트북 브라우저 http://192.168.56.102 -->
+<img width="1052" height="40" alt="스크린샷 2026-11-06 134913" src="https://github.com/user-attachments/assets/dfbecfb5-4727-447e-a2a4-aa21577f7560" />
+
+<img width="1033" height="211" alt="스크린샷 2026-11-06 134953" src="https://github.com/user-attachments/assets/48211f9c-658e-49a5-8c11-583e8f617965" />
+
+<img width="1914" height="940" alt="스크린샷 2026-11-06 135013" src="https://github.com/user-attachments/assets/34aaa512-e6db-4c06-8800-026808e4a3b6" />
 
 ### [실습 7] 두 서버 동시 실행 — 재현성 검증
 ```bash
@@ -122,7 +129,7 @@ web02     : ok=17 changed=0 unreachable=0 failed=0
 ```
 **손으로 만들고 코드화한 서버(localhost)** 와 **코드만으로 만든 서버(web02)** 가 같은 플레이북 기준으로 완전히 같은 상태임을 확인했습니다.
 
-<!-- 📸 두 서버 PLAY RECAP -->
+<img width="1911" height="1026" alt="스크린샷 2026-11-06 135139" src="https://github.com/user-attachments/assets/23b3a6aa-c2bf-4e68-8eed-a6b20a115976" />
 
 ---
 
@@ -170,10 +177,3 @@ web02     : ok=17 changed=0 unreachable=0 failed=0
 - **`ansible web -m ping`**: 인벤토리 전체 접속 확인
 - **`ansible-playbook <파일> -K --limit <호스트>`**: 특정 호스트에만 적용
 - **`ansible <호스트> -b -K -m command -a "<명령>"`**: 원격 서버에 sudo 명령 하나 실행
-
----
-
-## 🇯🇵 오늘의 일본어 엔지니어링
-- **단어 1:** **再現性 (さいげんせい, 사이겐세-)** - 재현성 (Reproducibility)
-- **단어 2:** **管理対象 (かんりたいしょう, 칸리타이쇼-)** - 관리 대상 (Managed node)
-- **단어 3:** **構築手順 (こうちくてじゅん, 코-치쿠테쥰)** - 구축 절차 (Build procedure)
