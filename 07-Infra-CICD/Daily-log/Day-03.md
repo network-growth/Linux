@@ -86,7 +86,7 @@ CI 경로도 함께 수정했습니다 (`playbook.yml` → `site.yml`, `files/*.
 
 - 결과: **yamllint ✅ / ansible-lint ✅ / shellcheck ✅** (첫 실행에 통과)
 
-<!-- 📸 CI (ci site.yml) 셋 다 초록 -->
+<img width="814" height="311" alt="스크린샷 2026-11-09 113815" src="https://github.com/user-attachments/assets/30a709b8-1943-4e8c-816a-c9db769fcff4" />
 
 ### [실습 5] 서버 결과 비교
 ```bash
@@ -100,8 +100,9 @@ ansible-playbook site.yml -K
 - 적용 후 재실행에서 두 서버 모두 `changed=0`
 - **코드 구조를 통째로 바꿨지만 서버 상태는 그대로**임을 확인
 
-<!-- 📸 --check --diff (백업 스크립트 diff) -->
-<!-- 📸 재실행 changed=0 (localhost, web02) -->
+<img width="1066" height="950" alt="스크린샷 2026-11-09 131904" src="https://github.com/user-attachments/assets/b337e4b4-dd5d-456a-8797-cb3d73840fe5" />
+
+<img width="1125" height="948" alt="스크린샷 2026-11-09 132003" src="https://github.com/user-attachments/assets/ce0c4464-1083-477f-add7-92187d0d7799" />
 
 ---
 
