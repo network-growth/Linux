@@ -97,3 +97,5 @@
 ### 07. Infra CI/CD
 
 GitHub Actions로 Ansible 코드를 자동 검사(CI)하고, merge되면 VM에 자동 배포(CD)하는 GitOps 프로젝트 — [폴더 바로가기](07-Infra-CICD/README.md)
+
+ㅈㅈㅈ
