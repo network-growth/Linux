@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 배포 대상
+        type: choice
+        options: [all, localhost, web02]
+        default: all
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push')
+    runs-on: [self-hosted, lab]
+    defaults:
+      run:
+        working-directory: 07-Infra-CICD/ansible
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: 어디서 실행 중인지
+        run: |
+          hostname
+          whoami
+          pwd
+
+      - name: 컬렉션 확인
+        run: ansible-galaxy collection install -r requirements.yml
+
+      - name: 배포
+        env:
+          ANSIBLE_BECOME_PASS: ${{ secrets.BECOME_PASSWORD }}
+          ANSIBLE_FORCE_COLOR: "1"
+          TARGET: ${{ inputs.target || 'all' }}
+        run: ansible-playbook site.yml --limit "$TARGET"
