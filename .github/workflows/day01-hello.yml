@@ -1,0 +1,47 @@
+name: Day01 Hello
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "07-Infra-CICD/**"
+      - ".github/workflows/day01-hello.yml"
+  workflow_dispatch:
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 누가, 무엇으로 실행했나
+        run: |
+          echo "이벤트: ${{ github.event_name }}"
+          echo "실행한 사람: ${{ github.actor }}"
+          echo "브랜치: ${{ github.ref_name }}"
+          echo "커밋: ${{ github.sha }}"
+
+      - name: 이 작업이 돌고 있는 컴퓨터
+        run: |
+          hostname
+          head -2 /etc/os-release
+          nproc
+          free -h
+          pwd
+          ls -la
+
+      - name: 저장소 코드 받기
+        uses: actions/checkout@v5
+
+      - name: 받은 뒤 다시 보기
+        run: |
+          pwd
+          ls
+          ls 07-Infra-CICD
+
+  second:
+    needs: hello
+    runs-on: ubuntu-latest
+    steps:
+      - name: 두 번째 작업
+        run: |
+          hostname
+          ls -la
