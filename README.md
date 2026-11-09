@@ -101,5 +101,6 @@ GitHub Actions로 Ansible 코드를 자동 검사(CI)하고, merge되면 VM에 �
 | Day | 주제 | 날짜 |
 |---|---|---|
 | [Day 01](07-Infra-CICD/Daily-log/Day-01.md) | GitHub Actions 기초 — 첫 워크플로 실행 | 2026-11-09 |
+| [Day 02](07-Infra-CICD/Daily-log/Day-02.md) | CI — push할 때마다 자동 코드 검사 | 2026-11-09 |
 
 ㅈㅈㅈ

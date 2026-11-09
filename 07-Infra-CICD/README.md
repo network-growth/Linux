@@ -1,5 +1,7 @@
 # 07. Infra CI/CD — GitOps (2026-11 ~)
 
+[![CI](https://github.com/network-growth/Linux/actions/workflows/ci.yml/badge.svg)](https://github.com/network-growth/Linux/actions/workflows/ci.yml)
+
 06에서 만든 Ansible 코드를 **GitHub에 올리면 자동으로 검사하고, 합쳐지면 자동으로 서버에 배포**하는 프로젝트.
 
 ## 목표
@@ -42,7 +44,7 @@ ubuntu-server [self-hosted runner] ──Ansible/SSH──> web02, 새 VM ...
 | Day | 주제 | 기록 |
 |---|---|---|
 | Day 01 | GitHub Actions 기초 | [Day-01](Daily-log/Day-01.md) · 2026-11-09 |
-| Day 02 | CI — lint·문법 자동 검사 | |
+| Day 02 | CI — lint·문법 자동 검사 | [Day-02](Daily-log/Day-02.md) · 2026-11-09 |
 | Day 03 | 배포하기 쉬운 구조로 변경 (roles, group_vars) | |
 | Day 04 | CD — self-hosted runner, Secrets, 자동 배포 | |
 | Day 05 | PR 흐름 — 브랜치 보호, CI 통과해야 merge | |
