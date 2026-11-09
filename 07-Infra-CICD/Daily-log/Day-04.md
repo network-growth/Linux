@@ -32,8 +32,6 @@ ubuntu-server [self-hosted runner, 라벨: lab] ── ansible-playbook ──> 
 
 공개 저장소에 self-hosted runner를 붙이면 남이 올린 PR로 **내 VM에서 코드가 실행**될 수 있어 이를 막는 설정입니다. 배포 워크플로 자체도 PR로는 실행되지 않게 작성했습니다.
 
-<!-- 📸 Secret 목록 / Actions 보안 설정 -->
-
 ### [실습 2] self-hosted runner 설치 (ubuntu-server)
 GitHub의 **New self-hosted runner** 화면에 나온 다운로드·설정 명령을 ubuntu-server에서 실행했습니다.
 
@@ -50,7 +48,13 @@ sudo ./svc.sh status          # active (running)
 ```
 `www` 계정으로 실행해야 Day 06에 만든 SSH 키(`~/.ssh/id_ed25519`)와 Ansible을 그대로 사용해 web02에 접속할 수 있습니다.
 
-<!-- 📸 svc.sh status / Runners 화면 Idle -->
+<img width="1208" height="407" alt="스크린샷 2026-11-09 132919" src="https://github.com/user-attachments/assets/8535bcba-6be6-46f0-bf45-98ad241e6ed2" />
+
+<img width="1839" height="137" alt="스크린샷 2026-11-09 133027" src="https://github.com/user-attachments/assets/a112ff17-a178-4d3e-9d6d-f2e9091d0328" />
+
+<img width="1538" height="364" alt="스크린샷 2026-11-09 133050" src="https://github.com/user-attachments/assets/62c66c30-e07a-40b2-b73c-d72086b08ac3" />
+
+<img width="1564" height="459" alt="스크린샷 2026-11-09 133102" src="https://github.com/user-attachments/assets/d40626cf-7813-46fd-9aaa-f4e4a49b26a0" />
 
 ### [실습 3] 배포 워크플로
 ```yaml
@@ -121,16 +125,14 @@ jobs:
 
 모든 실행에서 `어디서 실행 중인지` step이 `ubuntu-server` / `www` / `/home/www/actions-runner/_work/Linux/Linux/07-Infra-CICD/ansible`을 출력 → **GitHub의 작업이 내 VM에서 실행**된 것을 확인했습니다.
 
-<!-- 📸 Incorrect sudo password 로그 -->
-<!-- 📸 어디서 실행 중인지 (ubuntu-server / www) -->
-<!-- 📸 3차 성공 PLAY RECAP -->
+
+<img width="1538" height="126" alt="스크린샷 2026-11-09 133723" src="https://github.com/user-attachments/assets/60e91603-092d-4c35-a5be-ff8b83836737" />
+
+<img width="1418" height="759" alt="스크린샷 2026-11-09 134248" src="https://github.com/user-attachments/assets/848a9baf-85bb-47ea-bdaa-b46b94012799" />
 
 ### [실습 5] GitOps — 코드 수정만으로 배포
 `roles/nginx_site/templates/index.html.j2` 첫 줄을 웹에서 수정해 커밋했습니다 (`day04 gitops`).
 
-```html
-<h1>Iac - deployed by GitHub Actions</h1>
-```
 
 | 순서 | 워크플로 | 이벤트 | 결과 |
 |---|---|---|---|
@@ -153,14 +155,18 @@ curl http://192.168.56.102
 # <h1>Iac - deployed by GitHub Actions</h1>
 ```
 
-<!-- 📸 Actions 목록 (CI push → Deploy workflow_run) -->
-<!-- 📸 Deploy 로그 changed=1 (두 서버) -->
-<!-- 📸 curl / 브라우저 -->
+<img width="626" height="294" alt="스크린샷 2026-11-09 134416" src="https://github.com/user-attachments/assets/0b461ccf-d96a-42e0-b3ba-af407f84bd42" />
+
+<img width="781" height="209" alt="스크린샷 2026-11-09 134430" src="https://github.com/user-attachments/assets/f55dd2b9-294e-4fd3-9096-bff3b2b92a72" />
+
+<img width="595" height="61" alt="스크린샷 2026-11-09 134450" src="https://github.com/user-attachments/assets/e91be3ad-11c5-4469-b73b-d31f00425c5d" />
+
+<img width="494" height="61" alt="스크린샷 2026-11-09 134505" src="https://github.com/user-attachments/assets/9ea3e649-5003-4529-8c18-06fe159f2de0" />
 
 ### [실습 6] Secret 마스킹
 Deploy 로그의 `env:` 부분에서 `ANSIBLE_BECOME_PASS: ***`로 표시되어 비밀번호가 노출되지 않는 것을 확인했습니다.
 
-<!-- 📸 env ANSIBLE_BECOME_PASS: *** -->
+<img width="448" height="170" alt="스크린샷 2026-11-09 134532" src="https://github.com/user-attachments/assets/136d68d6-6f9e-48e1-ae4a-c310e7cb0607" />
 
 ---
 
