@@ -19,7 +19,12 @@ tar -czf "$FILE" -C / \
     etc/nginx/sites-available/lab \
     etc/ssh/sshd_config.d/10-hardening.conf
 
-# 오래된 백업 정리 (최신순 정렬 후 KEEP개 넘는 것 삭제)
-ls -1t "$BACKUP_DIR"/lab-*.tar.gz | tail -n +$((KEEP + 1)) | xargs -r rm --
+# 오래된 백업 정리 (수정 시각 기준 최신순 정렬 후 KEEP개 넘는 것 삭제)
+# ls 출력은 파일 이름을 안전하게 다루지 못해서(SC2012) find로 시각과 경로를 함께 뽑아 정렬
+find "$BACKUP_DIR" -maxdepth 1 -name 'lab-*.tar.gz' -printf '%T@ %p\n' \
+    | sort -rn \
+    | tail -n +$((KEEP + 1)) \
+    | cut -d' ' -f2- \
+    | xargs -r rm --
 
 echo "backup ok: $FILE ($(du -h "$FILE" | cut -f1))"
