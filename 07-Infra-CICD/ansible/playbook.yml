@@ -127,23 +127,23 @@
 
   handlers:
     # 같은 이름(listen)으로 묶인 핸들러는 적힌 순서대로 실행: 검사 → 반영
-    - name: check sshd
+    - name: Check sshd
       ansible.builtin.command: sshd -t
       changed_when: false
       listen: restart ssh
 
-    - name: restart sshd service
+    - name: Restart sshd service
       ansible.builtin.systemd_service:
         name: ssh
         state: restarted
       listen: restart ssh
 
-    - name: check nginx
+    - name: Check nginx
       ansible.builtin.command: nginx -t
       changed_when: false
       listen: reload nginx
 
-    - name: reload nginx service
+    - name: Reload nginx service
       ansible.builtin.systemd_service:
         name: nginx
         state: reloaded
