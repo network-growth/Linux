@@ -1,6 +1,6 @@
 ---
 # SSH 규칙을 enable보다 먼저 넣어야 접속이 끊기지 않음
-- name: UFW 설치
+- name: ufw 설치
   ansible.builtin.apt:
     name: ufw
     state: present
