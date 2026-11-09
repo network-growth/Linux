@@ -98,4 +98,8 @@
 
 GitHub Actions로 Ansible 코드를 자동 검사(CI)하고, merge되면 VM에 자동 배포(CD)하는 GitOps 프로젝트 — [폴더 바로가기](07-Infra-CICD/README.md)
 
+| Day | 주제 | 날짜 |
+|---|---|---|
+| [Day 01](07-Infra-CICD/Daily-log/Day-01.md) | GitHub Actions 기초 — 첫 워크플로 실행 | 2026-11-09 |
+
 ㅈㅈㅈ
