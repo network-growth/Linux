@@ -81,9 +81,29 @@ jobs:
 ### [실습 2] push로 실행
 커밋하자 자동으로 실행되어 `hello`(4s) → `second`(3s) 순서로 완료되었습니다. 그래프 위에는 `on: push`가 표시됩니다.
 
-<!-- 📸 hello → second 그래프 -->
-<!-- 📸 hello 로그 (이벤트·컴퓨터 정보·checkout 전후) -->
-<!-- 📸 second 로그 -->
+<img width="702" height="209" alt="스크린샷 2026-11-09 110128" src="https://github.com/user-attachments/assets/21854ecd-ddb0-4c8e-980e-a455b00a2a11" />
+
+<img width="718" height="267" alt="스크린샷 2026-11-09 110240" src="https://github.com/user-attachments/assets/413479b7-c116-42c7-a41a-419a3f7a0c3f" />
+
+<img width="531" height="151" alt="스크린샷 2026-11-09 110244" src="https://github.com/user-attachments/assets/46dd8521-1105-4f45-a56a-0a4e470ced1e" />
+
+<img width="591" height="270" alt="스크린샷 2026-11-09 110247" src="https://github.com/user-attachments/assets/281ee5ad-dccd-4f64-8334-b3e0ddffe454" />
+
+<img width="849" height="362" alt="스크린샷 2026-11-09 110253" src="https://github.com/user-attachments/assets/a34190b3-aa0a-4f34-888b-7bfc05033a73" />
+
+<img width="886" height="306" alt="스크린샷 2026-11-09 110257" src="https://github.com/user-attachments/assets/098785f8-0caf-46e8-92a3-da9f8050d6b3" />
+
+<img width="1353" height="306" alt="스크린샷 2026-11-09 110304" src="https://github.com/user-attachments/assets/c6e9bcbe-82c6-45cb-864b-930a78f5cbc5" />
+
+<img width="358" height="85" alt="스크린샷 2026-11-09 110309" src="https://github.com/user-attachments/assets/09492f82-e85d-40ee-9989-174aeff68bf0" />
+
+--------------------------------------------------------------------------------------
+
+<img width="445" height="219" alt="스크린샷 2026-11-09 110328" src="https://github.com/user-attachments/assets/9c3b6b8e-9efa-4624-88da-4eb2b7688e1b" />
+
+<img width="537" height="148" alt="스크린샷 2026-11-09 110331" src="https://github.com/user-attachments/assets/21b8e921-9d23-4192-b47c-05971434d707" />
+
+<img width="493" height="80" alt="스크린샷 2026-11-09 110332" src="https://github.com/user-attachments/assets/649ae80c-e90e-4104-b5ae-00ba3f106d48" />
 
 실행 결과 하단에 `ubuntu-latest` 라벨이 Ubuntu 26으로 바뀐다는 안내(notice)가 표시되었습니다. 에러가 아닌 GitHub runner 이미지 변경 공지입니다.
 
@@ -92,7 +112,7 @@ Actions → `Day01 Hello` → **Run workflow**로 실행했습니다. 같은 파
 
 - 실행 상세 화면의 `Re-run all jobs`는 **같은 실행을 원래 이벤트 그대로 다시** 돌리는 것이고, `Run workflow`는 **새 실행**을 만드는 버튼이라 서로 다름
 
-<!-- 📸 on: workflow_dispatch -->
+<img width="887" height="222" alt="스크린샷 2026-11-09 110818" src="https://github.com/user-attachments/assets/591f9736-0062-4b83-b75c-f4daaad1b5cf" />
 
 ### [실습 4] 경로 필터 확인
 | 커밋 | 수정한 파일 | 결과 |
@@ -102,7 +122,7 @@ Actions → `Day01 Hello` → **Run workflow**로 실행했습니다. 같은 파
 
 `test2` 실행은 목록에 잠시 `Queued`(노란 점)로 표시된 뒤 실행되었습니다. 실행 번호는 지운 실행(#2)의 번호를 다시 쓰지 않았습니다.
 
-<!-- 📸 실행 목록 (test1 없음, test2 Queued) -->
+<img width="1123" height="234" alt="스크린샷 2026-11-09 110913" src="https://github.com/user-attachments/assets/19fb8766-ac72-4df5-9e5a-d1d8aec6810e" />
 
 ### [실습 5] 일부러 실패시키기
 `저장소 코드 받기` 위에 `exit 1` step을 넣어 커밋했습니다 (`day01 fail`).
@@ -115,8 +135,11 @@ Actions → `Day01 Hello` → **Run workflow**로 실행했습니다. 같은 파
 
 해당 step을 지우고 다시 커밋(`day01 fix`)해 정상으로 돌렸습니다.
 
-<!-- 📸 실패 그래프 / 실패 step 로그 -->
-<!-- 📸 fix 후 초록 -->
+<img width="665" height="195" alt="스크린샷 2026-11-09 111118" src="https://github.com/user-attachments/assets/e4e5cc02-94b2-4ef3-a5e0-8aed8348d44a" />
+
+<img width="510" height="60" alt="스크린샷 2026-11-09 111210" src="https://github.com/user-attachments/assets/44264d1a-c4ac-4444-9af1-b97355e46371" />
+
+<img width="636" height="221" alt="스크린샷 2026-11-09 111213" src="https://github.com/user-attachments/assets/7c86bff6-046d-419e-b808-9923cd205536" />
 
 ---
 
