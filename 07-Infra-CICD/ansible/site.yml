@@ -1,0 +1,12 @@
+---
+# 07 Infra CI/CD - 전체 서버 구성
+# 06 Day 04의 플레이북 한 덩어리를 역할(role) 4개로 나눈 버전
+# 실행: ansible-playbook site.yml -K
+- name: Lab web server
+  hosts: web
+  become: true
+  roles:
+    - ssh_hardening
+    - nginx_site
+    - firewall
+    - backup

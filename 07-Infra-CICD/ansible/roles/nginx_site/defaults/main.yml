@@ -1,0 +1,4 @@
+---
+# 기본값 (group_vars / host_vars 값이 있으면 그쪽이 우선)
+nginx_site_root: /var/www/lab
+nginx_site_owner: www

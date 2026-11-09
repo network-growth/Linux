@@ -1,0 +1,30 @@
+---
+# SSH 규칙을 enable보다 먼저 넣어야 접속이 끊기지 않음
+- name: UFW 설치
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+
+- name: 기본 정책 - 들어오는 연결 차단
+  community.general.ufw:
+    default: deny
+    direction: incoming
+
+- name: 기본 정책 - 나가는 연결 허용
+  community.general.ufw:
+    default: allow
+    direction: outgoing
+
+- name: SSH 허용 + 접속 횟수 제한
+  community.general.ufw:
+    rule: limit
+    name: OpenSSH
+
+- name: HTTP 허용
+  community.general.ufw:
+    rule: allow
+    name: Nginx HTTP
+
+- name: 방화벽 켜기
+  community.general.ufw:
+    state: enabled

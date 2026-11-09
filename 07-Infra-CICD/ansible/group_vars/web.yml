@@ -1,0 +1,4 @@
+---
+# web 그룹 서버 공통 값 (서버마다 다르게 하려면 host_vars/<호스트>.yml에 덮어쓰기)
+nginx_site_root: /var/www/lab
+nginx_site_owner: www

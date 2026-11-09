@@ -1,0 +1,12 @@
+---
+# 같은 listen으로 묶인 핸들러는 적힌 순서대로 실행: 검사 → 반영
+- name: Check nginx
+  ansible.builtin.command: nginx -t
+  changed_when: false
+  listen: Reload nginx
+
+- name: Reload nginx service
+  ansible.builtin.systemd_service:
+    name: nginx
+    state: reloaded
+  listen: Reload nginx

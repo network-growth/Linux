@@ -1,0 +1,9 @@
+---
+- name: SSH 보안 설정 배치
+  ansible.builtin.copy:
+    src: 10-hardening.conf
+    dest: /etc/ssh/sshd_config.d/10-hardening.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart ssh
