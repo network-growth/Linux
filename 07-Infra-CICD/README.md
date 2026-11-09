@@ -45,8 +45,8 @@ ubuntu-server [self-hosted runner] ──Ansible/SSH──> web02, 새 VM ...
 |---|---|---|
 | Day 01 | GitHub Actions 기초 | [Day-01](Daily-log/Day-01.md) · 2026-11-09 |
 | Day 02 | CI — lint·문법 자동 검사 | [Day-02](Daily-log/Day-02.md) · 2026-11-09 |
-| Day 03 | 배포하기 쉬운 구조로 변경 (roles, group_vars) | |
-| Day 04 | CD — self-hosted runner, Secrets, 자동 배포 | |
+| Day 03 | 배포하기 쉬운 구조로 변경 (roles, group_vars) | [Day-03](Daily-log/Day-03.md) · 2026-11-09 |
+| Day 04 | CD — self-hosted runner, Secrets, 자동 배포 | [Day-04](Daily-log/Day-04.md) · 2026-11-09 |
 | Day 05 | PR 흐름 — 브랜치 보호, CI 통과해야 merge | |
 | Day 06 | 새 VM 추가 자동화 | |
 
