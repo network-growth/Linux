@@ -27,6 +27,9 @@ jobs:
           free -h
           pwd
           ls -la
+          
+      - name: 일부러 실패
+        run: exit 1
 
       - name: 저장소 코드 받기
         uses: actions/checkout@v5
