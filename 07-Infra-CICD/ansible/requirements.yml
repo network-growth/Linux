@@ -1,0 +1,4 @@
+---
+# 플레이북이 쓰는 Ansible 컬렉션 (community.general.ufw)
+collections:
+  - name: community.general

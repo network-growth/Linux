@@ -1,0 +1,7 @@
+---
+# 이 프로젝트의 YAML 작성 규칙
+extends: default
+
+rules:
+  line-length:
+    max: 120
