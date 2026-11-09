@@ -37,12 +37,12 @@
 | Require status checks to pass | ✅ `yamllint`, `ansible-lint`, `shellcheck` |
 | Bypass list | 비움 (관리자도 예외 없음) |
 
-<!-- 📸 Ruleset 설정 화면 -->
+<img width="1912" height="1021" alt="스크린샷 2026-11-09 145323" src="https://github.com/user-attachments/assets/5fec99e1-43d8-4b44-af79-e243e39fc3c7" />
 
 ### [실습 2] 직접 커밋이 막히는지
 웹에서 파일을 수정하고 커밋하자 `main`으로 바로 들어가지 않고 자동으로 새 브랜치(`network-growth-patch-2`)에 저장된 뒤 **PR 화면**으로 넘어갔습니다. 테스트용이라 PR은 만들지 않고 브랜치를 삭제했습니다.
 
-<!-- 📸 새 브랜치로 넘어간 Open a pull request 화면 -->
+<img width="1172" height="371" alt="스크린샷 2026-11-09 145429" src="https://github.com/user-attachments/assets/af7176d4-6fa3-4081-a871-5a17b0b16e21" />
 
 ### [실습 3] 좋은 PR — 검사 → merge → 자동 배포
 페이지 템플릿 2번째 줄의 `managed by playbook.yml`을 `site.yml`로 수정하는 PR을 만들었습니다 (PR #1 `fix-template`).
@@ -65,9 +65,11 @@ curl http://192.168.56.102
 ```
 서버에 접속하지 않고 **PR merge 하나로** 두 서버에 반영되었습니다.
 
-<!-- 📸 PR #1 Checks 초록 + Merge -->
-<!-- 📸 Actions: CI(push) → Deploy -->
-<!-- 📸 curl 두 서버 -->
+<img width="823" height="293" alt="스크린샷 2026-11-09 145856" src="https://github.com/user-attachments/assets/9001b25d-85ef-4c2e-a872-181ad92d1309" />
+
+<img width="1187" height="134" alt="스크린샷 2026-11-09 150015" src="https://github.com/user-attachments/assets/272046ca-49e8-43fe-888c-9403054b0f54" />
+
+<img width="444" height="137" alt="스크린샷 2026-11-09 150247" src="https://github.com/user-attachments/assets/9829f8ca-1e86-447a-b553-36b18bf18ab8" />
 
 ### [실습 4] 틀린 PR — merge가 막히는지
 `roles/firewall/tasks/main.yml`의 첫 태스크 이름을 `UFW 설치` → `ufw 설치`로 바꾼 PR을 만들었습니다 (PR #2, 브랜치 `bad-name`).
@@ -86,8 +88,9 @@ roles/firewall/tasks/main.yml:3:9 Task/Handler: ufw 설치
 
 PR을 merge하지 않고 **Close + 브랜치 삭제** → 틀린 코드는 `main`에도 서버에도 한 번도 들어가지 않았습니다.
 
-<!-- 📸 ansible-lint name[casing] 로그 -->
-<!-- 📸 PR #2 Merge 버튼 회색 (Required 체크 실패) -->
+<img width="1561" height="610" alt="스크린샷 2026-11-09 150637" src="https://github.com/user-attachments/assets/3859fecd-90ad-4d7a-add0-3f4a190b1195" />
+
+<img width="1786" height="1012" alt="스크린샷 2026-11-09 150946" src="https://github.com/user-attachments/assets/a5f823e5-5615-4082-9458-797392b9dddd" />
 
 | PR | 결과 |
 |---|---|
