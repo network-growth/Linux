@@ -99,9 +99,11 @@ jobs:
 | ansible-lint | ❌ | `couldn't resolve module/action 'community.general.ufw'` + `.yamllint` 설정 비호환 경고 |
 | shellcheck | ❌ | `SC2012: Use find instead of ls` (`lab-backup.sh` 23행) |
 
-<!-- 📸 첫 실행 그래프 (yamllint ✅ / ansible-lint ❌ / shellcheck ❌) -->
-<!-- 📸 ansible-lint 로그 -->
-<!-- 📸 shellcheck 로그 -->
+<img width="600" height="252" alt="스크린샷 2026-11-09 112624" src="https://github.com/user-attachments/assets/32c3c3ed-7d40-45ec-a1a0-451a63fd6da7" />
+
+<img width="1294" height="643" alt="스크린샷 2026-11-09 112641" src="https://github.com/user-attachments/assets/cce5a0af-b462-4e32-8802-2a5b89c7df8b" />
+
+<img width="713" height="226" alt="스크린샷 2026-11-09 112649" src="https://github.com/user-attachments/assets/49e1dd40-56fa-4d03-9cc3-a2191eb94818" />
 
 같은 job 안에서 **`플레이북 문법 검사` step은 통과했는데 `ansible-lint`만 컬렉션을 못 찾은** 것이 특징이었습니다.
 
@@ -141,12 +143,12 @@ Rating: 1/5 star (Last profile that met the validation criteria was 'basic')
 - 직접 웹에서 첫 글자를 대문자로 수정 (`Check sshd`, `Restart sshd service`, `Check nginx`, `Reload nginx service`)
 - `listen: restart ssh`, `listen: reload nginx`는 태스크의 `notify`와 짝을 맞추는 **신호 이름**이라 그대로 둠
 
-<!-- 📸 name[casing] 로그 -->
+<img width="1352" height="721" alt="스크린샷 2026-11-09 113147" src="https://github.com/user-attachments/assets/1f6baf0e-0d4f-4277-914a-96b914638629" />
 
 ### [실습 5] 전부 통과
 커밋(`fix name casing`)과 동시에 CI가 자동 실행되어 **yamllint ✅ / ansible-lint ✅ / shellcheck ✅**
 
-<!-- 📸 셋 다 초록 -->
+<img width="814" height="311" alt="스크린샷 2026-11-09 113815" src="https://github.com/user-attachments/assets/559cbac3-eec4-49a5-a9ff-a66810335dbb" />
 
 ---
 
