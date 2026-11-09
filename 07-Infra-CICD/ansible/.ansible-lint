@@ -1,0 +1,5 @@
+---
+# ansible-lint 설정
+# 이 파일이 있는 폴더(07-Infra-CICD/ansible)를 프로젝트 기준으로 삼아
+# requirements.yml의 컬렉션(community.general)을 찾아 설치함
+offline: false
