@@ -50,8 +50,9 @@ ip -br a
 # enp0s8  UP  192.168.56.104/24  ← Host-only (DHCP)
 ```
 
-<!-- 📸 어댑터 2 설정 화면 -->
-<!-- 📸 web03 ip -br a -->
+<img width="1236" height="783" alt="image" src="https://github.com/user-attachments/assets/3c93b373-bf27-4c68-b1c5-b2f26c7303ec" />
+
+<img width="1281" height="131" alt="스크린샷 2026-11-10 133542" src="https://github.com/user-attachments/assets/23def936-1317-4ab6-b450-a1a2580697ee" />
 
 ### [실습 2] 제어 노드 → web03 SSH 키 등록 (사람이 하는 유일한 서버 작업)
 플레이북이 비밀번호 로그인을 막기 때문에 **배포 전에 키를 먼저** 넣어야 합니다. 처음 들어가는 비밀번호는 코드에도 Secret에도 두지 않으므로 이 단계만 사람이 합니다.
@@ -65,8 +66,9 @@ ssh -o BatchMode=yes www@192.168.56.104 hostname    # web03 (비밀번호 없이
 
 처음엔 준비해 둔 `scripts/bootstrap-host.sh`로 하려 했지만 [2/4]에서 멈췄습니다 → Troubleshooting 2
 
-<!-- 📸 bootstrap-host.sh [2/4]에서 멈춘 화면 -->
-<!-- 📸 ssh-copy-id 성공 + hostname web03 -->
+<img width="794" height="61" alt="스크린샷 2026-11-10 134249" src="https://github.com/user-attachments/assets/9087deca-7bcc-4266-9afc-8519669ec8e9" />
+
+<img width="1287" height="101" alt="스크린샷 2026-11-10 134803" src="https://github.com/user-attachments/assets/7c362132-9f09-4137-b603-d29713659c32" />
 
 ### [실습 3] 인벤토리 한 줄 PR
 `main`은 Day 05 Ruleset으로 잠겨 있어 **PR로만** 수정할 수 있습니다. GitHub 웹에서 `inventory.ini` 마지막에 한 줄을 추가하고 새 브랜치 `add-web03`으로 PR을 만들었습니다.
@@ -87,8 +89,7 @@ web03 ansible_host=192.168.56.104 ansible_user=www
 
 Day 03에서 role을 분리해 둔 덕분에 **서버 추가 = 인벤토리 한 줄**로 끝났습니다.
 
-<!-- 📸 PR #5 Checks 초록 + Merge -->
-<!-- 📸 Actions 목록: CI(push) → Deploy -->
+<img width="1234" height="533" alt="스크린샷 2026-11-10 141427" src="https://github.com/user-attachments/assets/fa82728c-9b86-4407-9460-5aebe440c438" />
 
 ### [실습 4] 자동 배포 결과 — web03만 바뀜
 ```
@@ -106,7 +107,7 @@ web03     : ok=22 changed=15 unreachable=0 failed=0
 - `ok=22`가 18보다 4개 많은 이유: 변경이 생겨 **핸들러 4개**(sshd 검사·재시작, nginx 검사·reload)가 추가로 실행됨
 - 같은 플레이북, 같은 한 번의 실행인데 **서버마다 필요한 만큼만** 바꿈 (멱등성)
 
-<!-- 📸 Deploy 로그 PLAY RECAP (web03 changed=15) -->
+<img width="834" height="142" alt="스크린샷 2026-11-10 135938" src="https://github.com/user-attachments/assets/1103d586-1b1a-474d-a374-96a5b0b84217" />
 
 ### [실습 5] web03 결과 확인
 ```bash
@@ -118,7 +119,7 @@ ssh -o PubkeyAuthentication=no www@192.168.56.104   # Permission denied (publick
 ```
 같은 템플릿이 서버 이름만 다르게 채워 `host: web03`이 출력되고, SSH 비밀번호 로그인 차단까지 적용되었습니다.
 
-<!-- 📸 curl web03 -->
+<img width="532" height="65" alt="스크린샷 2026-11-10 140113" src="https://github.com/user-attachments/assets/884826e7-9fef-4843-be72-8d4615eef797" />
 
 ### [실습 6] 재현성 검증 — 서버 3대 모두 `changed=0`
 **Actions → Deploy → Run workflow → `all`**
@@ -137,7 +138,7 @@ web03     : ok=18 changed=0 unreachable=0 failed=0
 
 만든 방법이 전부 다른 서버 3대가 **같은 코드 기준으로 완전히 같은 상태**임을 확인했습니다.
 
-<!-- 📸 Run workflow all 결과 (3대 changed=0) -->
+<img width="1331" height="710" alt="스크린샷 2026-11-10 140518" src="https://github.com/user-attachments/assets/d0575926-1467-4e3b-8455-0653d64ef17c" />
 
 ### [실습 7] 마무리 수정 (이 기록과 같은 PR)
 | 파일 | 수정 |
