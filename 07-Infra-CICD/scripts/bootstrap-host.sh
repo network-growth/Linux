@@ -31,8 +31,16 @@ echo "[1/4] 예전 호스트 키 정리"
 ssh-keygen -R "$HOST_IP" >/dev/null 2>&1 || true
 
 echo "[2/4] 새 서버 호스트 키 등록"
-ssh-keyscan -H "$HOST_IP" 2>/dev/null >> "$HOME/.ssh/known_hosts"
-ssh-keygen -lf <(ssh-keyscan "$HOST_IP" 2>/dev/null) | head -1
+# 접속은 딱 1번만 (로그인 없이 끊는 접속이 쌓이면 OpenSSH PerSourcePenalties로 차단됨)
+HOST_KEY=$(ssh-keyscan -t ed25519 "$HOST_IP" 2>/dev/null || true)
+if [ -z "$HOST_KEY" ]; then
+    echo "호스트 키를 받지 못했습니다: $HOST_IP"
+    echo "확인: IP가 맞는지(ip -br a), 서버가 켜져 있는지, OpenSSH가 설치됐는지"
+    echo "여러 번 재시도했다면 새 서버에서: sudo systemctl restart ssh"
+    exit 1
+fi
+echo "$HOST_KEY" >> "$HOME/.ssh/known_hosts"
+ssh-keygen -lf <(echo "$HOST_KEY")
 
 echo "[3/4] 공개키 등록 (새 서버 비밀번호를 한 번 입력)"
 ssh-copy-id -i "$KEY" "$USER_NAME@$HOST_IP"

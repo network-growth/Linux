@@ -105,5 +105,4 @@ GitHub Actions로 Ansible 코드를 자동 검사(CI)하고, merge되면 VM에 �
 | [Day 03](07-Infra-CICD/Daily-log/Day-03.md) | 배포하기 쉬운 구조로 — role 분리 | 2026-11-09 |
 | [Day 04](07-Infra-CICD/Daily-log/Day-04.md) | CD — CI 통과하면 내 VM에 자동 배포 | 2026-11-09 |
 | [Day 05](07-Infra-CICD/Daily-log/Day-05.md) | PR 흐름 — CI를 통과한 변경만 main에 들어가게 | 2026-11-09 |
-
-ㅈㅈㅈ
+| [Day 06](07-Infra-CICD/Daily-log/Day-06.md) | 새 서버 추가 자동화 — PR 한 줄로 web03 배포 | 2026-11-10 |
