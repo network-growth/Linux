@@ -10,7 +10,7 @@ on:
       target:
         description: 배포 대상
         type: choice
-        options: [all, localhost, web02]
+        options: [all, localhost, web02, web03]
         default: all
 
 concurrency:
